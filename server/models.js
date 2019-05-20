@@ -1,11 +1,20 @@
 const {db}  = require('../db/index.js')
 
 
-console.log('expect db', db)
+// console.log('expect db', db)
 
 getRestaurantInfoModel = (restaurant, cb) => {
-  db.all(`SELECT * FROM restaurants
-  WHERE id = ${restaurant};`)
+    db.all(
+      `SELECT * FROM restaurants
+      WHERE id = ${restaurant};`,
+      (err, res) => {
+        if (err) {
+          console.log('ERROR: ', err);
+        } else {
+          cb(null, res);
+        }
+      })
+    
   // db.serialize(() => {
   //   console.log('expect open db', db)
   //   let restaurantsQuery = db.prepare(

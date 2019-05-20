@@ -80,7 +80,9 @@ const profileThumbs = [
 
 const dollarSignGenerator = () => {
   let dollarSigns = Math.floor(Math.random() * 5);
-  if (dollarSignGenerator === 0) dollarSigns += Math.floor(Math.random() * 5);
+  while (dollarSignGenerator === 0) {
+    dollarSigns += Math.floor(Math.random() * 5);
+  }
   return dollarSigns;
 };
 
@@ -270,7 +272,7 @@ let userComments = [
   "I have something to shout about. Infact something to sing about. But I'll just keep quiet and let you carry on."
 ];
 
-let followersAndReivewsGenerartor = () => {
+let followersAndReviewsGenerator = () => {
   let results = [];
   let reviews = Math.floor(Math.random() * 500);
   let followers = Math.floor(Math.random() * reviews);
@@ -374,7 +376,7 @@ module.exports = {
   websiteGenerator,
   userNames,
   userComments,
-  followersAndReivewsGenerartor,
+  followersAndReviewsGenerator,
   dateGenerator,
   cuisinesGenerator, 
   idGenerator
