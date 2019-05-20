@@ -87,7 +87,7 @@ const dollarSignGenerator = () => {
 let addressesFixer = () => {
   let results = [];
   for (let i = 0; i < addresses.addresses.length; i += 3) {
-    let address = `${addresses.addresses[i]}${addresses.addresses[i + 1]}${addresses.addresses[i + 2]}`;
+    let address = `${addresses.addresses[i]} ${addresses.addresses[i + 1]} ${addresses.addresses[i + 2]}`;
     results.push(address);
   }
   return results;
