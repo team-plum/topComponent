@@ -9,7 +9,7 @@ const {
   websiteGenerator,
   userNames,
   userComments,
-  followersAndReivewsGenerartor,
+  followersAndReviewsGenerator,
   dateGenerator,
   cuisinesGenerator,
   idGenerator
@@ -19,7 +19,7 @@ require('require-sql');
 const restaurantsSchema = require('./restaurantsSchema.sql');
 const picturePopUpSchema = require('./picturePopUpSchema.sql');
 const ratingsSchema = require('./ratingsSchema.sql');
-const {db} = require('../db/index.js')
+const {db} = require('./index.js')
 
 db.serialize(() => {
   db.run(restaurantsSchema);
@@ -28,6 +28,7 @@ db.serialize(() => {
     (id, nameOfRestaurant, cuisine, dollarSigns, addressOfRestaurant, phoneNumber, website)
     VALUES
     (?, ?, ?, ?, ?, ?, ?)`
+
   );
   for (let i = 0; i < 100; i++) {
     let restaurantName = namesOfRestaurants[i]
@@ -41,7 +42,7 @@ db.serialize(() => {
       websiteGenerator(restaurantName)
     ])
   }
-  // populateRestaurants.finalize()
+  populateRestaurants.finalize()
 
   db.each('SELECT * FROM restaurants', (err, data) => {
     if(err) throw err
@@ -74,9 +75,9 @@ db.serialize(() => {
       return Math.floor(Math.random() * (arr.length + 1))
     }    
     for(let j = 0; j < randomNumOfPics; j ++) {
-      let followersAndReivews = followersAndReivewsGenerartor()
-      let followers = followersAndReivews[0]
-      let reviews = followersAndReivews[1]
+      let followersAndReviews = followersAndReviewsGenerator()
+      let followers = followersAndReviews[0]
+      let reviews = followersAndReviews[1]
       populatePicturePopUp.run([
         idGenerator(),
         foodPics[randomIndex(foodPics)],
@@ -90,7 +91,7 @@ db.serialize(() => {
       ])
     }
   }
-  // populatePicturePopUp.finalize()
+  populatePicturePopUp.finalize()
 
   db.each('SELECT * FROM picturePopUp', (err, data) => {
     if(err) throw err
@@ -121,12 +122,11 @@ db.serialize(() => {
       ])
     }
   }
-  // populateRatings.finalize()
+  populateRatings.finalize()
   db.each('SELECT * FROM ratings', (err, data) => {
     if(err) throw err
     else console.log(data)
   })
 })
-
 
 
