@@ -9,7 +9,7 @@ const {
   websiteGenerator,
   userNames,
   userComments,
-  followersAndReivewsGenerartor,
+  followersAndReviewsGenerator,
   dateGenerator,
   cuisinesGenerator,
   idGenerator
@@ -75,7 +75,7 @@ db.serialize(() => {
       return Math.floor(Math.random() * (arr.length + 1))
     }    
     for(let j = 0; j < randomNumOfPics; j ++) {
-      let followersAndReivews = followersAndReivewsGenerartor()
+      let followersAndReivews = followersAndReviewsGenerator()
       let followers = followersAndReivews[0]
       let reviews = followersAndReivews[1]
       populatePicturePopUp.run([
