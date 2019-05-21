@@ -6,6 +6,7 @@ app.get('/ratings', getRatingsInfoController)
   // gets ratings for restaurant
   
 axios.get('/restaurtants', {params: {restaurantId: 50}})
+// gets restuarnt with id number 509
 
 // response
 
@@ -22,6 +23,7 @@ axios.get('/restaurtants', {params: {restaurantId: 50}})
 // ]
 
 axios.get('/picturePopUp', {params: {restaurantId: 50}})
+// gets all arr of images, user profile thumbs, usernames, and other info for picture pop up 
 
 // response
 
@@ -238,6 +240,7 @@ axios.get('/picturePopUp', {params: {restaurantId: 50}})
 // ]
 
 axios.get('/ratings', {params: {restaurantId: 50}})
+// gets array of ratings for restaurant
 
 // response
 
