@@ -1,6 +1,5 @@
 const {db}  = require('../db/index.js');
 
-
 getRestaurantInfoModel = (restaurant, cb) => {
 	db.all(
 		`SELECT * FROM restaurants
@@ -33,7 +32,6 @@ getRatingsInfoModel = (restaurant, cb) => {
     }
   )
 }
-
 
 module.exports = {
   getRestaurantInfoModel,

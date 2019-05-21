@@ -80,7 +80,9 @@ const profileThumbs = [
 
 const dollarSignGenerator = () => {
   let dollarSigns = Math.floor(Math.random() * 5);
-  if (dollarSignGenerator === 0) dollarSigns += Math.floor(Math.random() * 5);
+  while (dollarSignGenerator === 0) {
+    dollarSigns += Math.floor(Math.random() * 5);
+  }
   return dollarSigns;
 };
 
