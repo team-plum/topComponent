@@ -21,6 +21,9 @@ app.get('/ratings', getRatingsInfoController)
 // app.get('googleMap')
 
 
+
 app.listen(port, () => {
   console.log(`listening on ${port}!`)
 })
+
+

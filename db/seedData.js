@@ -79,12 +79,10 @@ const profileThumbs = [
 ];
 
 const dollarSignGenerator = () => {
-  let dollarSigns = Math.floor(Math.random() * 5);
-  while (dollarSignGenerator === 0) {
-    dollarSigns += Math.floor(Math.random() * 5);
-  }
+  let dollarSigns = Math.ceil(Math.random() * 4);
   return dollarSigns;
 };
+
 
 let addressesFixer = () => {
   let results = [];

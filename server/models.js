@@ -3,7 +3,7 @@ const {db}  = require('../db/index.js');
 getRestaurantInfoModel = (restaurant, cb) => {
 	db.all(
 		`SELECT * FROM restaurants
-    WHERE id = 50;`,
+    WHERE id = ${restaurant};`,
 		(err, res) => {
 		  if (err) console.log('failed to get restaurtant info from db at model =>', err);
 		  else cb(null, res);
@@ -14,7 +14,7 @@ getRestaurantInfoModel = (restaurant, cb) => {
 getPicturePopUpInfoModel = (restaurant, cb) => {
   db.all(
     `SELECT * FROM picturePopUp
-    WHERE restaurantId = 50`,
+    WHERE restaurantId = ${restaurant}`,
     (err, res) => {
       if(err) console.log('falied to get picturePopUp info from db at model =>', err)
       else cb(null, res)
@@ -25,7 +25,7 @@ getPicturePopUpInfoModel = (restaurant, cb) => {
 getRatingsInfoModel = (restaurant, cb) => {
   db.all(
     `SELECT * FROM ratings
-    WHERE restaurantID = 50`,
+    WHERE restaurantID = ${restaurant}`,
     (err, res) => {
       if (err) console.log('failed to get ratings info form db at model', err)
       else cb(null, res)

@@ -1,4 +1,5 @@
 const express = require('express')
+
 const { getRestaurantInfoModel,
         getPicturePopUpInfoModel,
         getRatingsInfoModel
@@ -6,6 +7,7 @@ const { getRestaurantInfoModel,
 
 module.exports = {
   getRestaurantInfoController: (req, res) => {
+    console.log('expect rest num =>', req.query)
     let restaurantId = req.query.restaurant
     getRestaurantInfoModel(restaurantId, (err, data) => {
       if(err) {
