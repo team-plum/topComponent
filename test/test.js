@@ -35,8 +35,8 @@ let sampleCuisines = cuisinesGenerator();
 let sampleFollowersAndReviews = [];
 let sampleDates = [];
 let sampleIds = [];
-const path = require('path')
-const dbPath = path.resolve(__dirname, 'test.db')
+const path = require('path');
+const dbPath = path.resolve(__dirname, 'test.db');
 
 for (let i = 0; i < 5; i++) {
   sampleFollowersAndReviews.push(followersAndReviewsGenerator());
@@ -48,7 +48,8 @@ let testName = `gets restaurant id, name, cuisinse, dollar signs, address, phone
 
 test(`${testName}`, () => {
   db = new sqlite.Database('test.db');
-  db.all(`
+  db.all(
+    `
   CREATE TABLE (
     id INT NOT NULL,
     foodPictureLink VARCHAR(250),
@@ -61,31 +62,51 @@ test(`${testName}`, () => {
     restaurantId INT,
     PRIMARY KEY (id)
   );`,
-  (err, row) => {
-    if(err) console.log(err)
-    else console.log(row)
-  }
-  )
-
-db.all(`INSERT INTO restaurants 
+    (err, row) => {
+      if (err) console.log(err);
+      else console.log(row);
+    }
+  );
+  db.all(
+    `INSERT INTO restaurants 
       (id, nameOfRestaurant, cuisine, dollarSigns, addressOfRestaurant, phoneNumber, website)
       VALUES
       (?, ?, ?, ?, ?, ?, ?)`,
-      [
-        0,
-        sampleNameOfRestaurant,
-        sampleCuisines,
-        sampleDollarSigns,
-        sampleAddress,
-        samplePhoneNumber,
-        samepleWebsite
-      ], 
-      (err, res) => {
-        if(err) console.log (err)
-        else console.log(res)
-      }
-      )
-  })
+    [
+      0,
+      sampleNameOfRestaurant,
+      sampleCuisines,
+      sampleDollarSigns,
+      sampleAddress,
+      samplePhoneNumber,
+      samepleWebsite
+    ],
+    (err, res) => {
+      if (err) console.log(err);
+      else console.log(res);
+    }
+  );
+
+  let expected = db.all(
+    `
+  SELECT * FROM restaurants`,
+    (err, row) => {
+      if (err) console.log(err);
+      else console.log(row);
+    }
+  );
+
+  expected(expected).toBe({
+    id: 0,
+    nameOfRestaurant: `${sampleNameOfRestaurant}`,
+    cuisine: `${sampleCuisines}`,
+    dollarSigns: `${sampleDollarSigns}`,
+    addressOfRestaurant: `${sampleAddress}`,
+    phoneNumber: `${samplePhoneNumber}`,
+    website: `${samepleWebsite}`
+  });
+});
+
 //   db.serialize(() => {
 //     let tableSchema = db.prepare()
 //     tableSchema.run((err, row) => {
@@ -93,7 +114,7 @@ db.all(`INSERT INTO restaurants
 //       else console.log(row)
 //     })
 //     let populateRestaurants = db.prepare(
-//       
+//
 //     );
 //     populateRestaurants.run(]);
 //     // populateRestaurants.finalize();
@@ -104,16 +125,8 @@ db.all(`INSERT INTO restaurants
 
 //     console.log(expected)
 //     expect(expected
-      
-//     ).toBe({
-//       id: 0,
-//       nameOfRestaurant: `${sampleNameOfRestaurant}`,
-//       cuisine: `${sampleCuisines}`,
-//       dollarSigns: `${sampleDollarSigns}`,
-//       addressOfRestaurant: `${sampleAddress}`,
-//       phoneNumber: `${samplePhoneNumber}`,
-//       website: `${samepleWebsite}`
-//     });
+
+//     ).toBe();
 //   });
 // });
 

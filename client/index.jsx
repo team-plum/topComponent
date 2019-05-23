@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import NameReviewsDollarSignsAndCuisines from './components/NameReviewsDollarSignsAndCuisines.jsx'
 
 class App extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
+    // this.state = {
 
-    }
+    // }
     //bind
   }
 
@@ -15,7 +16,8 @@ class App extends React.Component{
     return (
       <div className="app">
         <div className="restaurantName">
-          <h1>Restaurant Name</h1>
+          < NameReviewsDollarSignsAndCuisines />
+          
         </div>
         
       </div>

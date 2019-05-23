@@ -1,18 +1,21 @@
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const cors = require('cors')
+const path = require('path')
+
 const { getRestaurantInfoController,
         getPicturePopUpInfoController,
         getRatingsInfoController
       } = require('./controllers')
-const port = 3000
+const port = 3008
 
 let app = express()
-
 app.use(bodyParser.json())
 app.use(morgan('dev'))
-
-// app.use(express.static(__dirname + 'relative path to bundle'))
+app.use(cors())
+let fileToServePath = path.resolve(__dirname, '../dist/')
+app.use(express.static(fileToServePath))
 
 app.get('/restaurant', getRestaurantInfoController)
 app.get('/picturePopUp', getPicturePopUpInfoController)
