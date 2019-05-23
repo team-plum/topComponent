@@ -1,7 +1,7 @@
 CREATE TABLE picturePopUp (
   id INT NOT NULL,
-  foodPictureLink VARCHAR(250),
-  userThumbnail VARCHAR(150),
+  foodPictureLink VARCHAR(500),
+  userThumbnail VARCHAR(500),
   userName VARCHAR(50),
   userComment VARCHAR(250),
   userFollowers INT,
