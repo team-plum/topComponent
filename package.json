@@ -4,7 +4,7 @@
   "description": "mock yelp component",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack -d --watch",
+    "react-dev": "parcel watch client/index.html",
     "server-dev": "nodemon server/index.js",
     "test": "jest"
   },
@@ -39,5 +39,17 @@
     "require-sql": "^1.0.0",
     "sequelize": "^5.8.6",
     "sqlite3": "^4.0.8"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-plum/topComponent.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/team-plum/topComponent/issues"
+  },
+  "homepage": "https://github.com/team-plum/topComponent#readme"
 }
