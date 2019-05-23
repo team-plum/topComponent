@@ -5,38 +5,36 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      restaurant: 'sample'
+      ratings: 'sample'
     }
-    this.randomRestaurant = this.randomRestaurant.bind(this)
-    this.getRestaurantInfo = this.getRestaurantInfo.bind(this)
+    this.getRatingsInfo = this.getRatingsInfo.bind(this)
   }
 
   componentDidMount () {
-    this.getRestaurantInfo()
+    this.props.getRestaurantInfo(this.props.restaurant)
+    this.getRatingsInfo(this.props.restaurant)
   }
 
-  randomRestaurant () {
-    return Math.ceil(Math.random() * 100)
-  }
 
-  getRestaurantInfo () {
-    let restaurantNum = this.randomRestaurant()
-    axios.get('/restaurant', {params: {restaurant: restaurantNum}})
+
+  getRatingsInfo(restaurant) {
+    axios.get('/ratings', { params: {restaurant: restaurant}})
     .then((data) => {
       this.setState({
-        restaurant: data.data[0]
+        ratings: data.data
       })
-      console.log('expect restaurant info => ', data.data[0])
+      // console.log('expect ratings info => ', data.data)
+
     })
     .catch((err) => {
-      console.log('failed to get restaurant info at client', err)
+      console.log('failed to get ratings info at client', err)
     })
   }
 
   render() {
     return (
       <div>
-        {/* {this.state.restaurant} */}
+        hello from Name
       </div>
     )
   }
