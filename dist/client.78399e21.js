@@ -27437,48 +27437,40 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(NameReviewsDollarSignsAndCuisines).call(this, props));
     _this.state = {
-      restaurant: 'sample'
+      ratings: 'sample'
     };
-    _this.randomRestaurant = _this.randomRestaurant.bind(_assertThisInitialized(_this));
-    _this.getRestaurantInfo = _this.getRestaurantInfo.bind(_assertThisInitialized(_this));
+    _this.getRatingsInfo = _this.getRatingsInfo.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(NameReviewsDollarSignsAndCuisines, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.getRestaurantInfo();
+      this.props.getRestaurantInfo(this.props.restaurant);
+      this.getRatingsInfo(this.props.restaurant);
     }
   }, {
-    key: "randomRestaurant",
-    value: function randomRestaurant() {
-      return Math.ceil(Math.random() * 100);
-    }
-  }, {
-    key: "getRestaurantInfo",
-    value: function getRestaurantInfo() {
+    key: "getRatingsInfo",
+    value: function getRatingsInfo(restaurant) {
       var _this2 = this;
 
-      var restaurantNum = this.randomRestaurant();
-
-      _axios.default.get('/restaurant', {
+      _axios.default.get('/ratings', {
         params: {
-          restaurant: restaurantNum
+          restaurant: restaurant
         }
       }).then(function (data) {
         _this2.setState({
-          restaurant: data.data[0]
-        });
+          ratings: data.data
+        }); // console.log('expect ratings info => ', data.data)
 
-        console.log('expect restaurant info => ', data.data[0]);
       }).catch(function (err) {
-        console.log('failed to get restaurant info at client', err);
+        console.log('failed to get ratings info at client', err);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null);
+      return _react.default.createElement("div", null, "hello from Name");
     }
   }]);
 
@@ -27487,14 +27479,15 @@ function (_React$Component) {
 
 var _default = NameReviewsDollarSignsAndCuisines;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js"}],"index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js"}],"components/Map.jsx":[function(require,module,exports) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 var _react = _interopRequireDefault(require("react"));
-
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
-var _NameReviewsDollarSignsAndCuisines = _interopRequireDefault(require("./components/NameReviewsDollarSignsAndCuisines.jsx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27516,27 +27509,216 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+var Map =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Map, _React$Component);
+
+  function Map(props) {
+    _classCallCheck(this, Map);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Map).call(this, props)); // this.state = {
+    // }
+    // bind
+  }
+
+  _createClass(Map, [{
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", null, "hello from map");
+    }
+  }]);
+
+  return Map;
+}(_react.default.Component);
+
+var _default = Map;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"components/ImageCarousel.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var ImageCarousel =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ImageCarousel, _React$Component);
+
+  function ImageCarousel(props) {
+    var _this;
+
+    _classCallCheck(this, ImageCarousel);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ImageCarousel).call(this, props));
+    _this.state = {
+      images: null
+    };
+    _this.getImages = _this.getImages.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ImageCarousel, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getImages(this.props.restaurant);
+    }
+  }, {
+    key: "getImages",
+    value: function getImages(restaurant) {
+      var _this2 = this;
+
+      _axios.default.get('/picturePopUp', {
+        params: {
+          restaurant: restaurant
+        }
+      }).then(function (data) {
+        _this2.setState({
+          images: data.data
+        });
+      }).catch(function (err) {
+        console.log('failed to get images at client', err);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("div", null, "hello from carousel");
+    }
+  }]);
+
+  return ImageCarousel;
+}(_react.default.Component);
+
+var _default = ImageCarousel;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js"}],"index.jsx":[function(require,module,exports) {
+"use strict";
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _NameReviewsDollarSignsAndCuisines = _interopRequireDefault(require("./components/NameReviewsDollarSignsAndCuisines.jsx"));
+
+var _Map = _interopRequireDefault(require("./components/Map.jsx"));
+
+var _ImageCarousel = _interopRequireDefault(require("./components/ImageCarousel.jsx"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 var App =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(App, _React$Component);
 
   function App(props) {
+    var _this;
+
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props)); // this.state = {
-    // }
-    //bind
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    _this.state = {
+      restaurant: _this.randomRestaurant(),
+      restaurantInfo: null
+    };
+    _this.randomRestaurant = _this.randomRestaurant.bind(_assertThisInitialized(_this));
+    _this.getRestaurantInfo = _this.getRestaurantInfo.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(App, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "randomRestaurant",
+    value: function randomRestaurant() {
+      return Math.ceil(Math.random() * 100);
+    }
+  }, {
+    key: "getRestaurantInfo",
+    value: function getRestaurantInfo(restaurant) {
+      var _this2 = this;
+
+      _axios.default.get('/restaurant', {
+        params: {
+          restaurant: restaurant
+        }
+      }).then(function (data) {
+        _this2.setState({
+          restaurantInfo: data.data[0]
+        }); // console.log('expect restaurant info => ', data.data[0])
+
+      }).catch(function (err) {
+        console.log('failed to get restaurant info at client', err);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
         className: "app"
       }, _react.default.createElement("div", {
         className: "restaurantName"
-      }, _react.default.createElement(_NameReviewsDollarSignsAndCuisines.default, null)));
+      }, _react.default.createElement(_NameReviewsDollarSignsAndCuisines.default, {
+        restaurant: this.state.restaurant,
+        getRestaurantInfo: this.getRestaurantInfo,
+        restaurantInfo: this.state.restaurantInfo
+      })), _react.default.createElement("div", {
+        className: "map"
+      }, _react.default.createElement(_Map.default, {
+        restaurantInfo: this.state.restaurantInfo
+      })), _react.default.createElement("div", {
+        className: "imageCarousel"
+      }, _react.default.createElement(_ImageCarousel.default, {
+        restaurant: this.state.restaurant
+      })));
     }
   }]);
 
@@ -27544,7 +27726,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('app'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/NameReviewsDollarSignsAndCuisines.jsx":"components/NameReviewsDollarSignsAndCuisines.jsx"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","axios":"../node_modules/axios/index.js","./components/NameReviewsDollarSignsAndCuisines.jsx":"components/NameReviewsDollarSignsAndCuisines.jsx","./components/Map.jsx":"components/Map.jsx","./components/ImageCarousel.jsx":"components/ImageCarousel.jsx"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -27572,7 +27754,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62472" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59516" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
