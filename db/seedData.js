@@ -13,12 +13,12 @@ const ratingsGenerator = () => {
     year--;
   }
   let randomRating = val => {
-    let randomNum = Math.floor(Math.random() * val);
-    if (randomNum < 1) randomNum += Math.floor(Math.random() * val);
+    let randomNum = Math.ceil(Math.random() * val);
+    if (randomNum < 1) randomNum += Math.ceil(Math.random() * val);
     return randomNum;
   };
   for (let i = 0; i < numOfRatings; i++) {
-    ratings.push(randomRating(6));
+    ratings.push(randomRating(5));
   }
   for (let i = 0; i < numOfRatings; i++) {
     let tupel = [];
@@ -33,26 +33,46 @@ const ratingsGenerator = () => {
 
 
 const foodPics = [
-  'https://drive.google.com/uc?id=16p2G5_YsSe7A5RbAclBlwJNNkZWi8HpH',
-  'https://drive.google.com/uc?id=1llqzvSrv42q9CJmRGv1Nlj3amkoHnYQB',
-  'https://drive.google.com/uc?id=1xIVaTHfUc0MXBFNVm7KhDzEUVZOf1vSK',
-  'https://drive.google.com/uc?id=1sYJff-MOHkZagsq6vX0nzD04KWPjLUDF',
-  'https://drive.google.com/uc?id=1gvVEcWyL7XJOeGTnmzfROeHTxLQRripc',
-  'https://drive.google.com/uc?id=1jsNbfZDk91NFUG6qtK-EXUQC4o-3gK1v',
-  'https://drive.google.com/uc?id=1F56_dxhwar7HApUkox7eOa9_pEMgr8u7',
-  'https://drive.google.com/uc?id=1p8_UXyQMvRhwB5p-CHSFNQwK5kLG83Vf',
-  'https://drive.google.com/uc?id=1ez6swc2e4r6qK6w402KYMATlILgeRG4u',
-  'https://drive.google.com/uc?id=127v6l-k5yWgXPh9bglG08XdRNNo_FDbO',
-  'https://drive.google.com/uc?id=1UxxWcMbVoM3ZIiIXqsFX9Rz7aEiRVpgp',
-  'https://drive.google.com/uc?id=19nRPuG_RPLgR5QxmKks_ikYa9Z_UqpVh',
-  'https://drive.google.com/uc?id=1j3vxEwQt5UhRjt63EtHd_g4fNXsXoKdG',
-  'https://drive.google.com/uc?id=1TDE1MwalOb6CtNhjt6krfCZ2-Vty0XnF',
-  'https://drive.google.com/uc?id=1Ub63h0Q922w_7J34dDoPZSSAM0H1lI14',
-  'https://drive.google.com/uc?id=1LlQb4nsA0g4wU1J784CCSjUdFPaj4hjO',
-  'https://drive.google.com/uc?id=1iOR69ruoMEydM2WqSgFcy8Kza6o7kLxo',
-  'https://drive.google.com/uc?id=1mgNk7c2Fe01E7oYs_zUW4FuQPwRY3NSJ',
-  'https://drive.google.com/uc?id=1rcLz1XFr-P0dtQnVGnSdwb_bLatRrv60',
-  'https://drive.google.com/uc?id=15c3VG7ZS836gUd_PPyfEXsAH-Gql2MOY'
+  "https://drive.google.com/uc?id=1ie0TH9501aNKP9P746eTIMWZ450KVn8s", 
+  "https://drive.google.com/uc?id=1RAc54vvA41Q88sGhhQHpIsxdyK54nswb", 
+  "https://drive.google.com/uc?id=1a5kTnNSnGx5-GEyVqmxrnoJw4xV4EZxj", 
+  "https://drive.google.com/uc?id=1eeloGOAR0mZTOeB__4Lbowf2nNvNFgw9", 
+  "https://drive.google.com/uc?id=1kah49qkIhgAFxWOUMVQKfbVgcp3LtM7z", 
+  "https://drive.google.com/uc?id=13Jz0ocp8E5jnWkBVfJo21XJMDlcbUzOz", 
+  "https://drive.google.com/uc?id=1C1JNpaWw1oJQJy6KoZBIyr1CaPIwq_14", 
+  "https://drive.google.com/uc?id=15gzONShbuPNzQdwwFwMMupMaKJeqKv6c", 
+  "https://drive.google.com/uc?id=1L_tp7MonJYAPfhPMf9klwsPJuMcw0d51", 
+  "https://drive.google.com/uc?id=1tQ5uQLzFaHrjZqBoqGrcAtL9_Oey8z-r", 
+  "https://drive.google.com/uc?id=1HIX0PkmiCAblJP3cOI5ljPZl3JoP14ex", 
+  "https://drive.google.com/uc?id=1XXiLJeNh5B2vVAZkwFX5uvqCC7m6-r0U", 
+  "https://drive.google.com/uc?id=1K_LRV_7PGo4dHOhXLGdJigIuacsQzl0Q", 
+  "https://drive.google.com/uc?id=19fx_eiqWLiP4oq2CX_zRbJo1xXw1GTF_", 
+  "https://drive.google.com/uc?id=1K0eZkPvbAlNqY4iJPm6315Nzb0jSA0zb", 
+  "https://drive.google.com/uc?id=1FJMz_tF5oGIdR4oefGaQTk18yuVhkmhC", 
+  "https://drive.google.com/uc?id=1z7nRk-k7GtRKa-qjbZ3tynb8FmHSrXhl", 
+  "https://drive.google.com/uc?id=1Ja_290dx0fQgI_VmxgT0zoQFItUNMPZO", 
+  "https://drive.google.com/uc?id=1FRqFdhBeSzyBKB5iXiFKAyP8cy2TpOlo", 
+  "https://drive.google.com/uc?id=1XcSCelL25uWY0XclxjoLF8qJqko_XaWJ", 
+  "https://drive.google.com/uc?id=1qaHiGxfpT_F8_v7lOw8sofjs6w8o8fad", 
+  "https://drive.google.com/uc?id=1VVdEYtJkdkyhHOSOJZ_5-077bcpaNYnD", 
+  "https://drive.google.com/uc?id=1LOmBMGfajlVYX26tB3vpTi8OF1JYCjtE", 
+  "https://drive.google.com/uc?id=1ricWdsxvml_lMvXbqBEftrsx0ie2x4l_", 
+  "https://drive.google.com/uc?id=1IipmSGTSGfDot49KwC78aX7Zal3qlW85", 
+  "https://drive.google.com/uc?id=1J6tITCXb_rynaFPRcKX4D6TQ0OTnDJWb", 
+  "https://drive.google.com/uc?id=1IlSB-0E7d9pg7px-o6NpAvzDm3Wcx7CW", 
+  "https://drive.google.com/uc?id=1-Jzgu9JgTfknEO3Hpo-28bqg0OAs0XJo", 
+  "https://drive.google.com/uc?id=1C0odCmOMJ-PYhWP44tGbmDKWiCVLhtPi", 
+  "https://drive.google.com/uc?id=1ALGZCX64q9qDzRIseOh2iwAiXajcCwKQ", 
+  "https://drive.google.com/uc?id=1fa_ypGhGnJ8cY24S1pya-L48WgZcarE8", 
+  "https://drive.google.com/uc?id=1x1FI-lCuW5IAew01hP-QRDHkVRO8wK-d", 
+  "https://drive.google.com/uc?id=1whwnmb0Gy_mcyRvWsDPIGhDXDMYh0Rsv", 
+  "https://drive.google.com/uc?id=1g7TxQ1sKNrwUPd5gi2MMjoMA7VlH3QbL", 
+  "https://drive.google.com/uc?id=1io7ZmU-LYJMV9KPCDrps6dNJbwzXvFlT", 
+  "https://drive.google.com/uc?id=1wspHlk7Repjnj258A5C2sOHtRffuKBEA", 
+  "https://drive.google.com/uc?id=1IbgG5EKnedhGyandUwb1xWwFthX0i0ZF", 
+  "https://drive.google.com/uc?id=12Wm7-K7xdNiRW3lX3K0pU27WCE6Y9HKh", 
+  "https://drive.google.com/uc?id=1RHl4pF0rFfSVzA3Aw8gmbg4vh35jKZU5", 
+  "https://drive.google.com/uc?id=1YDKbI5ijh69OW_aMHGGmkbZgUTx5Wap2"
 ];
 
 const profileThumbs = [
@@ -82,7 +102,6 @@ const dollarSignGenerator = () => {
   let dollarSigns = Math.ceil(Math.random() * 4);
   return dollarSigns;
 };
-
 
 let addressesFixer = () => {
   let results = [];
@@ -216,7 +235,6 @@ let websiteGenerator = (restaurantName) => {
     return website
 };
 
-
 let userNames = [
   'Sarah Maximoff ',
   'Minnie De',
@@ -331,16 +349,12 @@ let cuisines = [
 
 let cuisinesGenerator = () => {
   let results = []
-  let num = Math.floor(Math.random() * 4)
-  while(num === 0) {
-    num += Math.floor(Math.random() * 4)
-  }
+  let num = Math.ceil(Math.random() * 4)
   let randomNumberOfCalls = (num) => {
     for(let i = 0; i < num; i++ ) {
       let randomInd = Math.floor(Math.random() * cuisines.length)
       if(!results.includes(cuisines[randomInd])) {
-        results.push(cuisines[randomInd])
-
+        results.push(' ' + cuisines[randomInd])
       }
     }
   }

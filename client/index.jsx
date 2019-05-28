@@ -10,7 +10,7 @@ class App extends React.Component{
     super(props)
     this.state = {
       restaurant: this.randomRestaurant(),
-      restaurantInfo: null
+      restaurantInfo: {}
     }
     this.randomRestaurant = this.randomRestaurant.bind(this)
     this.getRestaurantInfo = this.getRestaurantInfo.bind(this)

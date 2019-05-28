@@ -14,7 +14,13 @@ class Map extends React.Component {
   render () {
     return (
       <div>
-        hello from map
+        this is the map Component
+        <div>{this.props.restaurantInfo.addressOfRestaurant}</div>
+        <div>Get Directions</div>
+        <div>{this.props.restaurantInfo.phoneNumber}</div>
+        <div>{this.props.restaurantInfo.website}</div>
+        <div>Message business</div>
+        <div>Send to your Phone</div>
       </div>
     )
   }

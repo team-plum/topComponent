@@ -5,13 +5,18 @@ class ImageCarousel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      images: null
+      images: [{foodPictureThumb: ''}, {foodPictureThumb: ''}, {foodPictureThumb: ''}]
     }
     this.getImages = this.getImages.bind(this)
+    this.renderImages = this.renderImages.bind(this)
   }
   
   componentDidMount() {
     this.getImages(this.props.restaurant)
+  }
+
+  renderImages(arr, index) {
+    return <img src={arr[index]['foodPictureThumb']} />    
   }
   getImages (restaurant) {
     axios.get('/picturePopUp', {params: {restaurant: restaurant}})
@@ -24,11 +29,17 @@ class ImageCarousel extends React.Component {
       console.log('failed to get images at client', err)
     })
   }
+
+
   
   render () {
     return (
       <div>
-        hello from carousel
+        Image carousel starts here
+        {this.renderImages(this.state.images, 0)}
+        {this.renderImages(this.state.images, 1)}
+        {this.renderImages(this.state.images, 2)}
+
       </div>
     )
   }

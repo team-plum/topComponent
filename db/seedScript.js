@@ -56,7 +56,8 @@ db.serialize(() => {
     `INSERT INTO picturePopUp
     (
       id, 
-      foodPictureLink,
+      foodPictureFull,
+      foodPictureThumb,
       userThumbnail, 
       userName, 
       userComment, 
@@ -66,21 +67,36 @@ db.serialize(() => {
       restaurantId
     )
     VALUES
-    (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
   );
   for(let i = 1; i <= 100; i++) {
-    let randomNumOfPics = Math.floor(Math.random() * 20)
-    while(randomNumOfPics < 3) randomNumOfPics += Math.floor(Math.random() * 17)
+    let randomNumOfPics = Math.ceil(Math.random() * 20)
+    while(randomNumOfPics < 3) randomNumOfPics += Math.ceil(Math.random() * 17)
     let randomIndex = (arr) => {
       return Math.floor(Math.random() * (arr.length + 1))
-    }    
+    }
+    let foodPicIndexGen = () => {
+      let returned = []
+      let numGen = () => {
+        let num = Math.floor(Math.random() * 10) * 2
+        if(!returned.includes(num)) {
+          returned.push(num)
+          return num
+        } else {
+          numGen()
+        }
+      }
+      return numGen()
+    }
     for(let j = 0; j < randomNumOfPics; j ++) {
+      let foodPicIndex = foodPicIndexGen()
       let followersAndReviews = followersAndReviewsGenerator()
       let followers = followersAndReviews[0]
       let reviews = followersAndReviews[1]
       populatePicturePopUp.run([
         idGenerator(),
-        foodPics[randomIndex(foodPics)],
+        foodPics[foodPicIndex],
+        foodPics[(foodPicIndex + 1)],
         profileThumbs[randomIndex(profileThumbs)],
         userNames[randomIndex(userNames)],
         userComments[randomIndex(userComments)],
