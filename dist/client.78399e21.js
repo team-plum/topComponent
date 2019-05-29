@@ -95367,16 +95367,12 @@ function (_React$Component) {
     value: function getRatingsInfo(restaurant) {
       var _this2 = this;
 
-      var convertToStringMonth = function convertToStringMonth(arr) {
-        var months = ['zeroIndex', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Aug', 'Oct', 'Nov', 'Dec'];
-
-        for (var i = 0; i < arr.length; i++) {
-          arr[i].ratingMonth = months[arr[i]['ratingMonth']];
-        }
-
-        return arr;
-      };
-
+      // let convertToStringMonth = (arr) => {
+      //   for(let i = 0; i < arr.length; i ++ ) {
+      //     arr[i].ratingMonth = months[arr[i]['ratingMonth']]
+      //   }
+      //   return arr
+      // }
       var yearSorter = function yearSorter(arr) {
         var results = {};
 
@@ -95396,8 +95392,8 @@ function (_React$Component) {
           restaurant: restaurant
         }
       }).then(function (data) {
-        var convertedData = convertToStringMonth(data.data);
-        convertedData = yearSorter(convertedData);
+        // let convertedData = convertToStringMonth(data.data)
+        var convertedData = yearSorter(data.data);
 
         _this2.setState({
           ratingsInfo: convertedData
@@ -95501,8 +95497,49 @@ function (_React$Component) {
     key: "handleYearButtonClick",
     value: function handleYearButtonClick(year) {
       year = parseInt(year.target.value);
+      var yearRatingsInfo = this.state.ratingsInfo[year];
+
+      var monthSorter = function monthSorter(arr) {
+        var months = ['zeroIndex', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Aug', 'Oct', 'Nov', 'Dec'];
+        var results = [];
+        var counter = 1;
+
+        while (counter < 13) {
+          var ratingObj = {};
+          var numOfRatings = 0;
+          var ratingsTotal = 0;
+
+          for (var i = 0; i < arr.length; i++) {
+            if (arr[i]['ratingMonth'] === counter) {
+              ratingsTotal += arr[i]['rating'];
+              numOfRatings++;
+            }
+          }
+
+          var averageRating = ratingsTotal / numOfRatings;
+
+          if (numOfRatings > 0) {
+            averageRating = Math.round(ratingsTotal / numOfRatings * 2) / 2;
+          }
+
+          if (numOfRatings === 0 && ratingsTotal === 0) {
+            averageRating = 0;
+          }
+
+          ratingObj['month'] = months[counter];
+          ratingObj['averageRating'] = averageRating; // monthTupel.push(averageRating)
+
+          results.push(ratingObj);
+          counter++;
+        }
+
+        return results;
+      };
+
+      var graphData = monthSorter(yearRatingsInfo);
+      console.log(monthSorter(yearRatingsInfo));
       this.setState({
-        graphData: this.state.ratingsInfo[year]
+        graphData: graphData
       });
     }
   }, {
@@ -95525,13 +95562,13 @@ function (_React$Component) {
         }, _react.default.createElement(_recharts.CartesianGrid, {
           strokeDasharray: "3 3"
         }), _react.default.createElement(_recharts.XAxis, {
-          dataKey: "ratingMonth"
+          dataKey: "month"
         }), _react.default.createElement(_recharts.YAxis, {
           strokeDasharray: "3 3",
-          dataKey: "rating"
+          dataKey: "averageRating"
         }), _react.default.createElement(_recharts.Area, {
           type: "monotone",
-          dataKey: "rating",
+          dataKey: "averageRating",
           stroke: "#8884d8",
           fill: "#8884d8"
         }))))

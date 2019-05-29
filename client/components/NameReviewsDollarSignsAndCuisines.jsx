@@ -35,13 +35,12 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
   }
 
   getRatingsInfo(restaurant) {
-    let convertToStringMonth = (arr) => {
-      let months = ['zeroIndex', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Aug', 'Oct', 'Nov', 'Dec']
-      for(let i = 0; i < arr.length; i ++ ) {
-        arr[i].ratingMonth = months[arr[i]['ratingMonth']]
-      }
-      return arr
-    }
+    // let convertToStringMonth = (arr) => {
+    //   for(let i = 0; i < arr.length; i ++ ) {
+    //     arr[i].ratingMonth = months[arr[i]['ratingMonth']]
+    //   }
+    //   return arr
+    // }
     let yearSorter = (arr) => {
       let results = {}
       for(let i = 0; i < arr.length; i ++ ) {
@@ -53,10 +52,11 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
       }
       return results
     }
+   
     axios.get('/ratings', { params: {restaurant: restaurant}})
     .then((data) => {
-      let convertedData = convertToStringMonth(data.data)
-      convertedData = yearSorter(convertedData)
+      // let convertedData = convertToStringMonth(data.data)
+      let convertedData = yearSorter(data.data)
       this.setState({
         ratingsInfo: convertedData
       })
@@ -136,8 +136,40 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
 
   handleYearButtonClick (year) {
     year = parseInt(year.target.value)
+    let yearRatingsInfo = this.state.ratingsInfo[year]
+    let monthSorter = (arr) => {
+      let months = ['zeroIndex', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Aug', 'Oct', 'Nov', 'Dec']
+      let results = []
+      let counter = 1
+      while (counter < 13) {
+        let ratingObj = {}
+        let numOfRatings = 0
+        let ratingsTotal = 0
+        for(let i = 0; i < arr.length; i ++ ) {
+          if(arr[i]['ratingMonth'] === counter) {
+            ratingsTotal += arr[i]['rating']
+            numOfRatings ++
+          }
+        }
+        let averageRating = ratingsTotal / numOfRatings
+        if(numOfRatings > 0) {
+         averageRating = Math.round((ratingsTotal / numOfRatings) * 2) / 2
+        }
+        if (numOfRatings === 0 && ratingsTotal === 0 ) {
+          averageRating = 0
+        }
+        ratingObj['month'] = months[counter]
+        ratingObj['averageRating'] = averageRating
+        // monthTupel.push(averageRating)
+        results.push(ratingObj)
+        counter ++
+      }
+      return results
+    }
+    let graphData = monthSorter(yearRatingsInfo)
+    console.log(monthSorter(yearRatingsInfo))
     this.setState({
-      graphData: this.state.ratingsInfo[year]
+      graphData: graphData
     })
   }
 
@@ -177,9 +209,9 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
                   data={this.state.graphData}
                 > 
                 <CartesianGrid strokeDasharray="3 3"/>
-                <XAxis dataKey="ratingMonth"/>
-                <YAxis strokeDasharray="3 3" dataKey="rating" />
-                <Area type='monotone' dataKey='rating' stroke='#8884d8' fill='#8884d8' />
+                <XAxis dataKey="month"/>
+                <YAxis strokeDasharray="3 3" dataKey="averageRating"/>
+                <Area type='monotone' dataKey='averageRating' stroke='#8884d8' fill='#8884d8' />
                 </AreaChart>
               </div>
             </Popover>
