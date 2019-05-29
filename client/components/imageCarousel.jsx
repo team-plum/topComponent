@@ -35,11 +35,9 @@ class ImageCarousel extends React.Component {
   render () {
     return (
       <div>
-        Image carousel starts here
         {this.renderImages(this.state.images, 0)}
         {this.renderImages(this.state.images, 1)}
         {this.renderImages(this.state.images, 2)}
-
       </div>
     )
   }

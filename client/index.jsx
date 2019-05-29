@@ -48,11 +48,15 @@ class App extends React.Component{
           />
           
         </div>
+        <br></br>
+        <br></br>
         <div className="map">
           <Map 
             restaurantInfo = {this.state.restaurantInfo}
           />
         </div>
+        <br></br>
+        <br></br>
         <div className="imageCarousel">
           <ImageCarousel
             restaurant = {this.state.restaurant}

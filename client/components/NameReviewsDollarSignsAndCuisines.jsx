@@ -1,6 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import PopUp from 'react-popup'
+import claimedImg from '../../../stockPics/claimed button.png'
+import fullStar from '../../../stockPics/full star.png'
+import halfStar from '../../../stockPics/halfStar.png'
+import emptyStar from '../../../stockPics/empty star.png'
+// import detailsButtonImg from '../../../stockPics/details button.png'
+import { CartesianGrid, XAxis, YAxis, AreaChart, Area} from 'recharts'
+import {Modal, Button, Popover, OverlayTrigger} from 'react-bootstrap'
 
 class NameReviewsDollarSignsAndCuisines extends React.Component{
   constructor(props){
@@ -9,13 +15,15 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
       ratingsInfo: [],
       numberOfRatings: 0,
       averageRating: 0,
-      cuisines: ''
-
-    }
+      cuisines: '',
+      showDetails: false
+   }
     this.getRatingsInfo = this.getRatingsInfo.bind(this)
     this.getTotalAndAverageReviews = this.getTotalAndAverageReviews.bind(this)
     this.dollarSignGen = this.dollarSignGen.bind(this)
     this.cuisinesSpacer = this.cuisinesSpacer.bind(this)
+    this.starsGen = this.starsGen.bind(this)
+    this.handleDetialsButtonClick = this.handleDetialsButtonClick.bind(this)
   }
 
   componentDidMount () {
@@ -50,6 +58,12 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     })
   }
 
+  handleDetialsButtonClick () {
+    this.setState({
+      showDetails: !this.state.showDetails
+    })
+  }
+
   dollarSignGen (num) {
     let dollarSigns = ''
     let dollarSign = '$'
@@ -62,14 +76,67 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
   cuisinesSpacer (cuisinesStr) {
     return cuisinesStr.split(',').join('')
   }
+
+  starsGen (num) {
+    let results = []
+    while (num >= 1) {
+      results.push(<img src={fullStar} />)
+      num --
+    }
+    if (num > 0) {
+      results.push(<img src={halfStar} />)
+    }
+    while (results.length !== 5) {
+      results.push(<img src={emptyStar} />)
+    }
+    return results
+  }
+
   render() {
     return (
       <div>
-        <h1>{this.props.restaurantInfo.nameOfRestaurant}</h1> 
-        <div>claimed</div>
+        <div>
+      {[
+        <h1>{this.props.restaurantInfo.nameOfRestaurant}</h1>,
+          <img src={claimedImg}/>,
+          <div>claimed</div>
+      ]}
+        </div>
+        <div>
+          {this.starsGen(this.state.averageRating)}
+        </div>
         <div>stars</div>
-        <div>{`${this.state.numberOfRatings} ratings`}</div>
-        <div>details button</div>
+        <div>{`${this.state.numberOfRatings} reviews`}</div>
+        <div>
+        <OverlayTrigger
+          trigger="click"
+          placement="right"
+          overlay={
+            <Popover
+              id="detailsPopover"
+              title="Rating Details"
+            >
+              <div>
+                <AreaChart 
+                  width={600} 
+                  height ={300} 
+                  data={this.state.ratingsInfo}
+
+                > 
+                <CartesianGrid strokeDasharray="3 3"/>
+                <XAxis dataKey="ratingMonth"/>
+                <YAxis dstrokeDasharray="3 3" dataKey="rating" />
+                <Area type='monotone' dataKey='rating' stroke='#8884d8' fill='#8884d8' />
+                </AreaChart>
+              </div>
+            </Popover>
+          }
+        > 
+        <Button variant="outline-secondary">
+          details
+        </Button>
+        </OverlayTrigger>
+        </div>
         <div>{this.dollarSignGen(this.props.restaurantInfo.dollarSigns)}</div>
         <div>{this.props.restaurantInfo.cuisine}</div>
       </div>
