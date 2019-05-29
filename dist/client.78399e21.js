@@ -95350,6 +95350,7 @@ function (_React$Component) {
     _this.cuisinesSpacer = _this.cuisinesSpacer.bind(_assertThisInitialized(_this));
     _this.starsGen = _this.starsGen.bind(_assertThisInitialized(_this));
     _this.handleDetialsButtonClick = _this.handleDetialsButtonClick.bind(_assertThisInitialized(_this));
+    _this.detailsYearsButtonGen = _this.detailsYearsButtonGen.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -95378,13 +95379,10 @@ function (_React$Component) {
         var results = {};
 
         for (var i = 0; i < arr.length; i++) {
-          console.log('printing restults obj before year assingnment', results[arr[i]['ratingYear']]);
-
           if (results.hasOwnProperty(arr[i]['ratingYear'])) {
             results[arr[i]['ratingYear']].push(arr[i]);
           } else {
             results[arr[i]['ratingYear']] = [arr[i]];
-            console.log('printing results after assingmnet', results);
           }
         }
 
@@ -95396,9 +95394,8 @@ function (_React$Component) {
           restaurant: restaurant
         }
       }).then(function (data) {
-        console.log(data.data);
         var convertedData = convertToStringMonth(data.data);
-        convertedData = yearSorter(convertedData); // console.log('printing converted data', convertedData)
+        convertedData = yearSorter(convertedData);
 
         _this2.setState({
           ratingsInfo: convertedData
@@ -95477,6 +95474,21 @@ function (_React$Component) {
       return results;
     }
   }, {
+    key: "detailsYearsButtonGen",
+    value: function detailsYearsButtonGen() {
+      var results = [];
+
+      for (var key in this.state.ratingsInfo) {
+        results.push(_react.default.createElement(_reactBootstrap.ButtonGroup, {
+          "aria-label": "years buttons"
+        }, _react.default.createElement(_reactBootstrap.Button, {
+          variant: "outline-secondary"
+        }, key)));
+      }
+
+      return results;
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", null, _react.default.createElement("div", null, [_react.default.createElement("h1", null, this.props.restaurantInfo.nameOfRestaurant), _react.default.createElement("img", {
@@ -95487,16 +95499,18 @@ function (_React$Component) {
         overlay: _react.default.createElement(_reactBootstrap.Popover, {
           id: "detailsPopover",
           title: "Rating Details"
-        }, _react.default.createElement("div", null, _react.default.createElement(_recharts.AreaChart, {
+        }, _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.ButtonToolbar, {
+          "aria-label": "years buttons"
+        }, this.detailsYearsButtonGen())), _react.default.createElement("div", null, _react.default.createElement(_recharts.AreaChart, {
           width: 600,
-          height: 300,
+          height: 400,
           data: this.state.ratingsInfo
         }, _react.default.createElement(_recharts.CartesianGrid, {
           strokeDasharray: "3 3"
         }), _react.default.createElement(_recharts.XAxis, {
           dataKey: "ratingMonth"
         }), _react.default.createElement(_recharts.YAxis, {
-          dstrokeDasharray: "3 3",
+          strokeDasharray: "3 3",
           dataKey: "rating"
         }), _react.default.createElement(_recharts.Area, {
           type: "monotone",
@@ -95804,7 +95818,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55893" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60724" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

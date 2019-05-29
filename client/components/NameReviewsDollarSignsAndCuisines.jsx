@@ -6,7 +6,7 @@ import halfStar from '../../stockPics/halfstar.png'
 import emptyStar from '../../stockPics/empty star.png'
 // import detailsButtonImg from '../../../stockPics/details button.png'
 import { CartesianGrid, XAxis, YAxis, AreaChart, Area} from 'recharts'
-import { Button, Popover, OverlayTrigger} from 'react-bootstrap'
+import { Button, Popover, OverlayTrigger, ButtonGroup, ButtonToolbar} from 'react-bootstrap'
 
 class NameReviewsDollarSignsAndCuisines extends React.Component{
   constructor(props){
@@ -24,6 +24,7 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     this.cuisinesSpacer = this.cuisinesSpacer.bind(this)
     this.starsGen = this.starsGen.bind(this)
     this.handleDetialsButtonClick = this.handleDetialsButtonClick.bind(this)
+    this.detailsYearsButtonGen = this.detailsYearsButtonGen.bind(this)
   }
 
   componentDidMount () {
@@ -42,22 +43,18 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     let yearSorter = (arr) => {
       let results = {}
       for(let i = 0; i < arr.length; i ++ ) {
-        console.log('printing restults obj before year assingnment', results[arr[i]['ratingYear']] )
         if (results.hasOwnProperty(arr[i]['ratingYear'])) {
           results[arr[i]['ratingYear']].push(arr[i])
         } else {
           results[arr[i]['ratingYear']] = [arr[i]]
-          console.log('printing results after assingmnet', results)
         }
       }
       return results
     }
     axios.get('/ratings', { params: {restaurant: restaurant}})
     .then((data) => {
-      console.log(data.data)
       let convertedData = convertToStringMonth(data.data)
       convertedData = yearSorter(convertedData)
-      // console.log('printing converted data', convertedData)
       this.setState({
         ratingsInfo: convertedData
       })
@@ -116,6 +113,17 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     return results
   }
 
+  detailsYearsButtonGen () {
+    let results = []
+    for(var key in this.state.ratingsInfo) {
+      results.push(
+        <ButtonGroup aria-label="years buttons">
+          <Button variant="outline-secondary">{key}</Button>
+        </ButtonGroup>
+      )
+    }
+    return results
+  }
   render() {
     return (
       <div>
@@ -141,21 +149,26 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
               title="Rating Details"
             >
               <div>
+                <ButtonToolbar aria-label="years buttons" >
+                {this.detailsYearsButtonGen()}
+                </ButtonToolbar>
+              </div>
+              <div>
                 <AreaChart 
                   width={600} 
-                  height ={300} 
+                  height ={400} 
                   data={this.state.ratingsInfo}
 
                 > 
                 <CartesianGrid strokeDasharray="3 3"/>
                 <XAxis dataKey="ratingMonth"/>
-                <YAxis dstrokeDasharray="3 3" dataKey="rating" />
+                <YAxis strokeDasharray="3 3" dataKey="rating" />
                 <Area type='monotone' dataKey='rating' stroke='#8884d8' fill='#8884d8' />
                 </AreaChart>
               </div>
             </Popover>
           }
-        > 
+        >
         <Button variant="outline-secondary">
           details
         </Button>

@@ -3,11 +3,11 @@ const addresses = require('./rawData/addresses.js');
 const ratingsGenerator = () => {
   let year = 2019;
   let months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  let numOfRatings = Math.floor(Math.random() * 100);
+  let numOfRatings = Math.ceil(Math.random() * 100);
   let ratings = [];
   let yrs = [];
   let ratingTupels = [];
-  let yrsInBiz = Math.floor(Math.random() * 40);
+  let yrsInBiz = Math.ceil(Math.random() * 5);
   for (let i = 0; i < yrsInBiz; i++) {
     yrs.push(year);
     year--;
