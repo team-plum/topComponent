@@ -32,10 +32,34 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
   }
 
   getRatingsInfo(restaurant) {
+    let convertToStringMonth = (arr) => {
+      let months = ['zeroIndex', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Aug', 'Oct', 'Nov', 'Dec']
+      for(let i = 0; i < arr.length; i ++ ) {
+        arr[i].ratingMonth = months[arr[i]['ratingMonth']]
+      }
+      return arr
+    }
+    let yearSorter = (arr) => {
+      let results = {}
+      for(let i = 0; i < arr.length; i ++ ) {
+        console.log('printing restults obj before year assingnment', results[arr[i]['ratingYear']] )
+        if (results.hasOwnProperty(arr[i]['ratingYear'])) {
+          results[arr[i]['ratingYear']].push(arr[i])
+        } else {
+          results[arr[i]['ratingYear']] = [arr[i]]
+          console.log('printing results after assingmnet', results)
+        }
+      }
+      return results
+    }
     axios.get('/ratings', { params: {restaurant: restaurant}})
     .then((data) => {
+      console.log(data.data)
+      let convertedData = convertToStringMonth(data.data)
+      convertedData = yearSorter(convertedData)
+      // console.log('printing converted data', convertedData)
       this.setState({
-        ratingsInfo: data.data
+        ratingsInfo: convertedData
       })
       this.getTotalAndAverageReviews(data.data)
     })

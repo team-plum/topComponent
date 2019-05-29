@@ -95364,13 +95364,44 @@ function (_React$Component) {
     value: function getRatingsInfo(restaurant) {
       var _this2 = this;
 
+      var convertToStringMonth = function convertToStringMonth(arr) {
+        var months = ['zeroIndex', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Aug', 'Oct', 'Nov', 'Dec'];
+
+        for (var i = 0; i < arr.length; i++) {
+          arr[i].ratingMonth = months[arr[i]['ratingMonth']];
+        }
+
+        return arr;
+      };
+
+      var yearSorter = function yearSorter(arr) {
+        var results = {};
+
+        for (var i = 0; i < arr.length; i++) {
+          console.log('printing restults obj before year assingnment', results[arr[i]['ratingYear']]);
+
+          if (results.hasOwnProperty(arr[i]['ratingYear'])) {
+            results[arr[i]['ratingYear']].push(arr[i]);
+          } else {
+            results[arr[i]['ratingYear']] = [arr[i]];
+            console.log('printing results after assingmnet', results);
+          }
+        }
+
+        return results;
+      };
+
       _axios.default.get('/ratings', {
         params: {
           restaurant: restaurant
         }
       }).then(function (data) {
+        console.log(data.data);
+        var convertedData = convertToStringMonth(data.data);
+        convertedData = yearSorter(convertedData); // console.log('printing converted data', convertedData)
+
         _this2.setState({
-          ratingsInfo: data.data
+          ratingsInfo: convertedData
         });
 
         _this2.getTotalAndAverageReviews(data.data);
