@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import claimedImg from '../../../stockPics/claimed button.png'
-import fullStar from '../../../stockPics/full star.png'
-import halfStar from '../../../stockPics/halfStar.png'
-import emptyStar from '../../../stockPics/empty star.png'
+import claimedImg from '../../stockPics/claimed button.png'
+import fullStar from '../../stockPics/full star.png'
+import halfStar from '../../stockPics/halfStar.png'
+import emptyStar from '../../stockPics/empty star.png'
 // import detailsButtonImg from '../../../stockPics/details button.png'
 import { CartesianGrid, XAxis, YAxis, AreaChart, Area} from 'recharts'
-import {Modal, Button, Popover, OverlayTrigger} from 'react-bootstrap'
+import { Button, Popover, OverlayTrigger} from 'react-bootstrap'
 
 class NameReviewsDollarSignsAndCuisines extends React.Component{
   constructor(props){

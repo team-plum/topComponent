@@ -27393,14 +27393,14 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"../../stockPics/claimed button.png":[function(require,module,exports) {
-module.exports = "/claimed button.1d2cf081.png";
-},{}],"../../stockPics/full star.png":[function(require,module,exports) {
-module.exports = "/full star.2f51c912.png";
-},{}],"../../stockPics/halfStar.png":[function(require,module,exports) {
-module.exports = "/halfStar.49280af5.png";
-},{}],"../../stockPics/empty star.png":[function(require,module,exports) {
-module.exports = "/empty star.f1311410.png";
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"../stockPics/claimed button.png":[function(require,module,exports) {
+module.exports = "/claimed button.823ce046.png";
+},{}],"../stockPics/full star.png":[function(require,module,exports) {
+module.exports = "/full star.75a1b769.png";
+},{}],"../stockPics/halfStar.png":[function(require,module,exports) {
+module.exports = "/halfStar.58fac828.png";
+},{}],"../stockPics/empty star.png":[function(require,module,exports) {
+module.exports = "/empty star.874447bf.png";
 },{}],"../node_modules/core-js/modules/_global.js":[function(require,module,exports) {
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -95294,13 +95294,13 @@ var _react = _interopRequireDefault(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
-var _claimedButton = _interopRequireDefault(require("../../../stockPics/claimed button.png"));
+var _claimedButton = _interopRequireDefault(require("../../stockPics/claimed button.png"));
 
-var _fullStar = _interopRequireDefault(require("../../../stockPics/full star.png"));
+var _fullStar = _interopRequireDefault(require("../../stockPics/full star.png"));
 
-var _halfStar = _interopRequireDefault(require("../../../stockPics/halfStar.png"));
+var _halfStar = _interopRequireDefault(require("../../stockPics/halfStar.png"));
 
-var _emptyStar = _interopRequireDefault(require("../../../stockPics/empty star.png"));
+var _emptyStar = _interopRequireDefault(require("../../stockPics/empty star.png"));
 
 var _recharts = require("recharts");
 
@@ -95484,7 +95484,7 @@ function (_React$Component) {
 
 var _default = NameReviewsDollarSignsAndCuisines;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../../../stockPics/claimed button.png":"../../stockPics/claimed button.png","../../../stockPics/full star.png":"../../stockPics/full star.png","../../../stockPics/halfStar.png":"../../stockPics/halfStar.png","../../../stockPics/empty star.png":"../../stockPics/empty star.png","recharts":"../node_modules/recharts/es6/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js"}],"components/Map.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../../stockPics/claimed button.png":"../stockPics/claimed button.png","../../stockPics/full star.png":"../stockPics/full star.png","../../stockPics/halfStar.png":"../stockPics/halfStar.png","../../stockPics/empty star.png":"../stockPics/empty star.png","recharts":"../node_modules/recharts/es6/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js"}],"components/Map.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
