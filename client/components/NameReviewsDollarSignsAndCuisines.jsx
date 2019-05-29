@@ -12,11 +12,12 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      ratingsInfo: [],
+      ratingsInfo: {},
       numberOfRatings: 0,
       averageRating: 0,
       cuisines: '',
-      showDetails: false
+      showDetails: false,
+      graphData: []
    }
     this.getRatingsInfo = this.getRatingsInfo.bind(this)
     this.getTotalAndAverageReviews = this.getTotalAndAverageReviews.bind(this)
@@ -25,6 +26,7 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     this.starsGen = this.starsGen.bind(this)
     this.handleDetialsButtonClick = this.handleDetialsButtonClick.bind(this)
     this.detailsYearsButtonGen = this.detailsYearsButtonGen.bind(this)
+    this.handleYearButtonClick = this.handleYearButtonClick.bind(this)
   }
 
   componentDidMount () {
@@ -117,13 +119,28 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     let results = []
     for(var key in this.state.ratingsInfo) {
       results.push(
-        <ButtonGroup aria-label="years buttons">
-          <Button variant="outline-secondary">{key}</Button>
+        <ButtonGroup aria-label="years buttons" >
+          <Button 
+            variant="outline-secondary" 
+            key={key} 
+            value={key}
+            onClick={(e) => {this.handleYearButtonClick(e)}}
+          >
+            {key}
+          </Button>
         </ButtonGroup>
       )
     }
     return results
   }
+
+  handleYearButtonClick (year) {
+    year = parseInt(year.target.value)
+    this.setState({
+      graphData: this.state.ratingsInfo[year]
+    })
+  }
+
   render() {
     return (
       <div>
@@ -157,8 +174,7 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
                 <AreaChart 
                   width={600} 
                   height ={400} 
-                  data={this.state.ratingsInfo}
-
+                  data={this.state.graphData}
                 > 
                 <CartesianGrid strokeDasharray="3 3"/>
                 <XAxis dataKey="ratingMonth"/>

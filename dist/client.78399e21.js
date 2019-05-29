@@ -95338,11 +95338,12 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(NameReviewsDollarSignsAndCuisines).call(this, props));
     _this.state = {
-      ratingsInfo: [],
+      ratingsInfo: {},
       numberOfRatings: 0,
       averageRating: 0,
       cuisines: '',
-      showDetails: false
+      showDetails: false,
+      graphData: []
     };
     _this.getRatingsInfo = _this.getRatingsInfo.bind(_assertThisInitialized(_this));
     _this.getTotalAndAverageReviews = _this.getTotalAndAverageReviews.bind(_assertThisInitialized(_this));
@@ -95351,6 +95352,7 @@ function (_React$Component) {
     _this.starsGen = _this.starsGen.bind(_assertThisInitialized(_this));
     _this.handleDetialsButtonClick = _this.handleDetialsButtonClick.bind(_assertThisInitialized(_this));
     _this.detailsYearsButtonGen = _this.detailsYearsButtonGen.bind(_assertThisInitialized(_this));
+    _this.handleYearButtonClick = _this.handleYearButtonClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -95476,17 +95478,32 @@ function (_React$Component) {
   }, {
     key: "detailsYearsButtonGen",
     value: function detailsYearsButtonGen() {
+      var _this3 = this;
+
       var results = [];
 
       for (var key in this.state.ratingsInfo) {
         results.push(_react.default.createElement(_reactBootstrap.ButtonGroup, {
           "aria-label": "years buttons"
         }, _react.default.createElement(_reactBootstrap.Button, {
-          variant: "outline-secondary"
+          variant: "outline-secondary",
+          key: key,
+          value: key,
+          onClick: function onClick(e) {
+            _this3.handleYearButtonClick(e);
+          }
         }, key)));
       }
 
       return results;
+    }
+  }, {
+    key: "handleYearButtonClick",
+    value: function handleYearButtonClick(year) {
+      year = parseInt(year.target.value);
+      this.setState({
+        graphData: this.state.ratingsInfo[year]
+      });
     }
   }, {
     key: "render",
@@ -95504,7 +95521,7 @@ function (_React$Component) {
         }, this.detailsYearsButtonGen())), _react.default.createElement("div", null, _react.default.createElement(_recharts.AreaChart, {
           width: 600,
           height: 400,
-          data: this.state.ratingsInfo
+          data: this.state.graphData
         }, _react.default.createElement(_recharts.CartesianGrid, {
           strokeDasharray: "3 3"
         }), _react.default.createElement(_recharts.XAxis, {
