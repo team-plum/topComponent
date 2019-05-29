@@ -27397,8 +27397,8 @@ module.exports = require('./lib/axios');
 module.exports = "/claimed button.823ce046.png";
 },{}],"../stockPics/full star.png":[function(require,module,exports) {
 module.exports = "/full star.75a1b769.png";
-},{}],"../stockPics/halfStar.png":[function(require,module,exports) {
-module.exports = "/halfStar.58fac828.png";
+},{}],"../stockPics/halfstar.png":[function(require,module,exports) {
+module.exports = "/halfstar.52f3632e.png";
 },{}],"../stockPics/empty star.png":[function(require,module,exports) {
 module.exports = "/empty star.874447bf.png";
 },{}],"../node_modules/core-js/modules/_global.js":[function(require,module,exports) {
@@ -95298,7 +95298,7 @@ var _claimedButton = _interopRequireDefault(require("../../stockPics/claimed but
 
 var _fullStar = _interopRequireDefault(require("../../stockPics/full star.png"));
 
-var _halfStar = _interopRequireDefault(require("../../stockPics/halfStar.png"));
+var _halfstar = _interopRequireDefault(require("../../stockPics/halfstar.png"));
 
 var _emptyStar = _interopRequireDefault(require("../../stockPics/empty star.png"));
 
@@ -95433,7 +95433,7 @@ function (_React$Component) {
 
       if (num > 0) {
         results.push(_react.default.createElement("img", {
-          src: _halfStar.default
+          src: _halfstar.default
         }));
       }
 
@@ -95484,7 +95484,7 @@ function (_React$Component) {
 
 var _default = NameReviewsDollarSignsAndCuisines;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../../stockPics/claimed button.png":"../stockPics/claimed button.png","../../stockPics/full star.png":"../stockPics/full star.png","../../stockPics/halfStar.png":"../stockPics/halfStar.png","../../stockPics/empty star.png":"../stockPics/empty star.png","recharts":"../node_modules/recharts/es6/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js"}],"components/Map.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../../stockPics/claimed button.png":"../stockPics/claimed button.png","../../stockPics/full star.png":"../stockPics/full star.png","../../stockPics/halfstar.png":"../stockPics/halfstar.png","../../stockPics/empty star.png":"../stockPics/empty star.png","recharts":"../node_modules/recharts/es6/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js"}],"components/Map.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
