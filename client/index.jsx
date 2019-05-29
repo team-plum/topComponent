@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios'
 import NameReviewsDollarSignsAndCuisines from './components/NameReviewsDollarSignsAndCuisines.jsx'
 import Map from './components/Map.jsx'
-import ImageCarousel from './components/ImageCarousel.jsx'
+import ImageCarousel from './components/imageCarousel.jsx'
 
 class App extends React.Component{
   constructor(props){

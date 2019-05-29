@@ -95539,7 +95539,7 @@ function (_React$Component) {
 
 var _default = Map;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/ImageCarousel.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/imageCarousel.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -95650,7 +95650,7 @@ var _NameReviewsDollarSignsAndCuisines = _interopRequireDefault(require("./compo
 
 var _Map = _interopRequireDefault(require("./components/Map.jsx"));
 
-var _ImageCarousel = _interopRequireDefault(require("./components/ImageCarousel.jsx"));
+var _imageCarousel = _interopRequireDefault(require("./components/imageCarousel.jsx"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -95735,7 +95735,7 @@ function (_React$Component) {
         restaurantInfo: this.state.restaurantInfo
       })), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("div", {
         className: "imageCarousel"
-      }, _react.default.createElement(_ImageCarousel.default, {
+      }, _react.default.createElement(_imageCarousel.default, {
         restaurant: this.state.restaurant
       })));
     }
@@ -95745,7 +95745,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('app'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","axios":"../node_modules/axios/index.js","./components/NameReviewsDollarSignsAndCuisines.jsx":"components/NameReviewsDollarSignsAndCuisines.jsx","./components/Map.jsx":"components/Map.jsx","./components/ImageCarousel.jsx":"components/ImageCarousel.jsx"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","axios":"../node_modules/axios/index.js","./components/NameReviewsDollarSignsAndCuisines.jsx":"components/NameReviewsDollarSignsAndCuisines.jsx","./components/Map.jsx":"components/Map.jsx","./components/imageCarousel.jsx":"components/imageCarousel.jsx"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -95773,7 +95773,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62686" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55893" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
