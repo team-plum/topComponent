@@ -5,8 +5,8 @@ import fullStar from '../../stockPics/full star.png'
 import halfStar from '../../stockPics/halfstar.png'
 import emptyStar from '../../stockPics/empty star.png'
 // import detailsButtonImg from '../../../stockPics/details button.png'
-import { CartesianGrid, XAxis, YAxis, AreaChart, Area, ReferenceLine} from 'recharts'
-import { Button, Popover, OverlayTrigger, ButtonGroup, ButtonToolbar, Tooltip} from 'react-bootstrap'
+import { CartesianGrid, XAxis, YAxis, AreaChart, Area, BarChart, Bar} from 'recharts'
+import { Button, Popover, OverlayTrigger, ButtonGroup, ButtonToolbar} from 'react-bootstrap'
 
 class NameReviewsDollarSignsAndCuisines extends React.Component{
   constructor(props){
@@ -16,17 +16,20 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
       numberOfRatings: 0,
       averageRating: 0,
       cuisines: '',
-      showDetails: false,
-      graphData: []
+      graphData: [],
+      barGraphData: [{numOfRatings: 0, num: 0}],
+      barGraphDataToggle: false
    }
     this.getRatingsInfo = this.getRatingsInfo.bind(this)
     this.getTotalAndAverageReviews = this.getTotalAndAverageReviews.bind(this)
     this.dollarSignGen = this.dollarSignGen.bind(this)
     this.cuisinesSpacer = this.cuisinesSpacer.bind(this)
     this.starsGen = this.starsGen.bind(this)
-    this.handleDetialsButtonClick = this.handleDetialsButtonClick.bind(this)
     this.detailsYearsButtonGen = this.detailsYearsButtonGen.bind(this)
     this.handleYearButtonClick = this.handleYearButtonClick.bind(this)
+    this.getBarGraphInfo = this.getBarGraphInfo.bind(this)
+    this.handleDetailsButtonClick = this.handleDetailsButtonClick.bind(this)
+    this.barGraphDataKey = this.barGraphDataKey.bind(this)
   }
 
   componentDidMount () {
@@ -35,12 +38,6 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
   }
 
   getRatingsInfo(restaurant) {
-    // let convertToStringMonth = (arr) => {
-    //   for(let i = 0; i < arr.length; i ++ ) {
-    //     arr[i].ratingMonth = months[arr[i]['ratingMonth']]
-    //   }
-    //   return arr
-    // }
     let yearSorter = (arr) => {
       let results = {}
       for(let i = 0; i < arr.length; i ++ ) {
@@ -55,12 +52,13 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
    
     axios.get('/ratings', { params: {restaurant: restaurant}})
     .then((data) => {
-      // let convertedData = convertToStringMonth(data.data)
       let convertedData = yearSorter(data.data)
       this.setState({
         ratingsInfo: convertedData
       })
       this.getTotalAndAverageReviews(data.data)
+      this.handleYearButtonClick(2019)
+      this.getBarGraphInfo(data.data)
     })
     .catch((err) => {
       console.log('failed to get ratings info at client', err)
@@ -78,12 +76,6 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     let averageRating = Math.round((totalRatings/ratingsInfo.length)*2)/2
     this.setState({
       averageRating: averageRating
-    })
-  }
-
-  handleDetialsButtonClick () {
-    this.setState({
-      showDetails: !this.state.showDetails
     })
   }
 
@@ -115,6 +107,15 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     return results
   }
 
+  handleDetailsButtonClick () {
+    this.setState({
+      barGraphDataToggle: !this.state.barGraphDataToggle
+    })
+  }
+
+  barGraphDataKey () {
+    return this.state.barGraphDataToggle ? this.state.barGraphData : null
+  }
   detailsYearsButtonGen () {
     let results = []
     for(var key in this.state.ratingsInfo) {
@@ -124,7 +125,7 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
             variant="outline-secondary" 
             key={key} 
             value={key}
-            onClick={(e) => {this.handleYearButtonClick(e)}}
+            onClick={(e) => {this.handleYearButtonClick(e.target.value)}}
           >
             {key}
           </Button>
@@ -135,7 +136,6 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
   }
 
   handleYearButtonClick (year) {
-    year = parseInt(year.target.value)
     let yearRatingsInfo = this.state.ratingsInfo[year]
     let monthSorter = (arr) => {
       let months = ['zeroIndex', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Aug', 'Oct', 'Nov', 'Dec']
@@ -167,9 +167,30 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
       return results
     }
     let graphData = monthSorter(yearRatingsInfo)
-    console.log(monthSorter(yearRatingsInfo))
     this.setState({
       graphData: graphData
+    })
+  }
+
+  getBarGraphInfo (data) {
+    let results = []
+    let counter = 5
+    while(counter > 0) {
+      let ratingsObj = {}
+      ratingsObj.numOfRatings = 0
+      ratingsObj.number = counter
+      for(let key in data) {
+        if(data[key].rating === counter) {
+          ratingsObj.numOfRatings ++
+        }
+
+      }
+      results.push(ratingsObj)
+      counter --
+    }
+    console.log(results)
+    this.setState({
+      barGraphData: results
     })
   }
 
@@ -208,18 +229,31 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
                   height ={400} 
                   data={this.state.graphData}
                 > 
-                <CartesianGrid strokeDasharray="3 3"/>
+                <CartesianGrid strokeDasharray="1 1"/>
                 <XAxis dataKey="month"  type="category"/>
                 <YAxis dataKey="averageRating" type="number"/>
-                <ReferenceLine x="month" y="averageRating" strokt="red"/>
                 <Area type='monotone' dataKey='averageRating' stroke="#8884d8" fill="#8884d8" />
-                
                 </AreaChart>
+                <br></br>
+                <BarChart 
+                  width={600}
+                  height={400}
+                  data={this.barGraphDataKey()}
+                  layout="vertical"
+                  >
+                <XAxis type="number"/>
+                <YAxis type="category" dataKey="number"/>
+                <Bar 
+                  background label
+                  dataKey="numOfRatings" 
+                  fill="#8884d8" 
+                />
+                </BarChart>
               </div>
             </Popover>
           }
         >
-        <Button variant="outline-secondary">
+        <Button variant="outline-secondary" onClick={()=>{this.handleDetailsButtonClick()}}>
           details
         </Button>
         </OverlayTrigger>

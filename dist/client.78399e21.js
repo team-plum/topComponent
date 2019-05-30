@@ -95342,17 +95342,23 @@ function (_React$Component) {
       numberOfRatings: 0,
       averageRating: 0,
       cuisines: '',
-      showDetails: false,
-      graphData: []
+      graphData: [],
+      barGraphData: [{
+        numOfRatings: 0,
+        num: 0
+      }],
+      barGraphDataToggle: false
     };
     _this.getRatingsInfo = _this.getRatingsInfo.bind(_assertThisInitialized(_this));
     _this.getTotalAndAverageReviews = _this.getTotalAndAverageReviews.bind(_assertThisInitialized(_this));
     _this.dollarSignGen = _this.dollarSignGen.bind(_assertThisInitialized(_this));
     _this.cuisinesSpacer = _this.cuisinesSpacer.bind(_assertThisInitialized(_this));
     _this.starsGen = _this.starsGen.bind(_assertThisInitialized(_this));
-    _this.handleDetialsButtonClick = _this.handleDetialsButtonClick.bind(_assertThisInitialized(_this));
     _this.detailsYearsButtonGen = _this.detailsYearsButtonGen.bind(_assertThisInitialized(_this));
     _this.handleYearButtonClick = _this.handleYearButtonClick.bind(_assertThisInitialized(_this));
+    _this.getBarGraphInfo = _this.getBarGraphInfo.bind(_assertThisInitialized(_this));
+    _this.handleDetailsButtonClick = _this.handleDetailsButtonClick.bind(_assertThisInitialized(_this));
+    _this.barGraphDataKey = _this.barGraphDataKey.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -95367,12 +95373,6 @@ function (_React$Component) {
     value: function getRatingsInfo(restaurant) {
       var _this2 = this;
 
-      // let convertToStringMonth = (arr) => {
-      //   for(let i = 0; i < arr.length; i ++ ) {
-      //     arr[i].ratingMonth = months[arr[i]['ratingMonth']]
-      //   }
-      //   return arr
-      // }
       var yearSorter = function yearSorter(arr) {
         var results = {};
 
@@ -95392,7 +95392,6 @@ function (_React$Component) {
           restaurant: restaurant
         }
       }).then(function (data) {
-        // let convertedData = convertToStringMonth(data.data)
         var convertedData = yearSorter(data.data);
 
         _this2.setState({
@@ -95400,6 +95399,10 @@ function (_React$Component) {
         });
 
         _this2.getTotalAndAverageReviews(data.data);
+
+        _this2.handleYearButtonClick(2019);
+
+        _this2.getBarGraphInfo(data.data);
       }).catch(function (err) {
         console.log('failed to get ratings info at client', err);
       });
@@ -95419,13 +95422,6 @@ function (_React$Component) {
       var averageRating = Math.round(totalRatings / ratingsInfo.length * 2) / 2;
       this.setState({
         averageRating: averageRating
-      });
-    }
-  }, {
-    key: "handleDetialsButtonClick",
-    value: function handleDetialsButtonClick() {
-      this.setState({
-        showDetails: !this.state.showDetails
       });
     }
   }, {
@@ -95472,6 +95468,18 @@ function (_React$Component) {
       return results;
     }
   }, {
+    key: "handleDetailsButtonClick",
+    value: function handleDetailsButtonClick() {
+      this.setState({
+        barGraphDataToggle: !this.state.barGraphDataToggle
+      });
+    }
+  }, {
+    key: "barGraphDataKey",
+    value: function barGraphDataKey() {
+      return this.state.barGraphDataToggle ? this.state.barGraphData : null;
+    }
+  }, {
     key: "detailsYearsButtonGen",
     value: function detailsYearsButtonGen() {
       var _this3 = this;
@@ -95486,7 +95494,7 @@ function (_React$Component) {
           key: key,
           value: key,
           onClick: function onClick(e) {
-            _this3.handleYearButtonClick(e);
+            _this3.handleYearButtonClick(e.target.value);
           }
         }, key)));
       }
@@ -95496,7 +95504,6 @@ function (_React$Component) {
   }, {
     key: "handleYearButtonClick",
     value: function handleYearButtonClick(year) {
-      year = parseInt(year.target.value);
       var yearRatingsInfo = this.state.ratingsInfo[year];
 
       var monthSorter = function monthSorter(arr) {
@@ -95537,14 +95544,41 @@ function (_React$Component) {
       };
 
       var graphData = monthSorter(yearRatingsInfo);
-      console.log(monthSorter(yearRatingsInfo));
       this.setState({
         graphData: graphData
       });
     }
   }, {
+    key: "getBarGraphInfo",
+    value: function getBarGraphInfo(data) {
+      var results = [];
+      var counter = 5;
+
+      while (counter > 0) {
+        var ratingsObj = {};
+        ratingsObj.numOfRatings = 0;
+        ratingsObj.number = counter;
+
+        for (var key in data) {
+          if (data[key].rating === counter) {
+            ratingsObj.numOfRatings++;
+          }
+        }
+
+        results.push(ratingsObj);
+        counter--;
+      }
+
+      console.log(results);
+      this.setState({
+        barGraphData: results
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       return _react.default.createElement("div", null, _react.default.createElement("div", null, [_react.default.createElement("h1", null, this.props.restaurantInfo.nameOfRestaurant), _react.default.createElement("img", {
         src: _claimedButton.default
       }), _react.default.createElement("div", null, "claimed")]), _react.default.createElement("div", null, this.starsGen(this.state.averageRating)), _react.default.createElement("div", null, "stars"), _react.default.createElement("div", null, "".concat(this.state.numberOfRatings, " reviews")), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.OverlayTrigger, {
@@ -95560,25 +95594,39 @@ function (_React$Component) {
           height: 400,
           data: this.state.graphData
         }, _react.default.createElement(_recharts.CartesianGrid, {
-          strokeDasharray: "3 3"
+          strokeDasharray: "1 1"
         }), _react.default.createElement(_recharts.XAxis, {
           dataKey: "month",
           type: "category"
         }), _react.default.createElement(_recharts.YAxis, {
           dataKey: "averageRating",
           type: "number"
-        }), _react.default.createElement(_recharts.ReferenceLine, {
-          x: "month",
-          y: "averageRating",
-          strokt: "red"
         }), _react.default.createElement(_recharts.Area, {
           type: "monotone",
           dataKey: "averageRating",
           stroke: "#8884d8",
           fill: "#8884d8"
+        })), _react.default.createElement("br", null), _react.default.createElement(_recharts.BarChart, {
+          width: 600,
+          height: 400,
+          data: this.barGraphDataKey(),
+          layout: "vertical"
+        }, _react.default.createElement(_recharts.XAxis, {
+          type: "number"
+        }), _react.default.createElement(_recharts.YAxis, {
+          type: "category",
+          dataKey: "number"
+        }), _react.default.createElement(_recharts.Bar, {
+          background: true,
+          label: true,
+          dataKey: "numOfRatings",
+          fill: "#8884d8"
         }))))
       }, _react.default.createElement(_reactBootstrap.Button, {
-        variant: "outline-secondary"
+        variant: "outline-secondary",
+        onClick: function onClick() {
+          _this4.handleDetailsButtonClick();
+        }
       }, "details"))), _react.default.createElement("div", null, this.dollarSignGen(this.props.restaurantInfo.dollarSigns)), _react.default.createElement("div", null, this.props.restaurantInfo.cuisine));
     }
   }]);
@@ -95877,7 +95925,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60724" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56585" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
