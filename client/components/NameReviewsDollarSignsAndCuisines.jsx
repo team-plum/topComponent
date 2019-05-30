@@ -5,8 +5,8 @@ import fullStar from '../../stockPics/full star.png'
 import halfStar from '../../stockPics/halfstar.png'
 import emptyStar from '../../stockPics/empty star.png'
 // import detailsButtonImg from '../../../stockPics/details button.png'
-import { CartesianGrid, XAxis, YAxis, AreaChart, Area} from 'recharts'
-import { Button, Popover, OverlayTrigger, ButtonGroup, ButtonToolbar} from 'react-bootstrap'
+import { CartesianGrid, XAxis, YAxis, AreaChart, Area, ReferenceLine} from 'recharts'
+import { Button, Popover, OverlayTrigger, ButtonGroup, ButtonToolbar, Tooltip} from 'react-bootstrap'
 
 class NameReviewsDollarSignsAndCuisines extends React.Component{
   constructor(props){
@@ -209,9 +209,11 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
                   data={this.state.graphData}
                 > 
                 <CartesianGrid strokeDasharray="3 3"/>
-                <XAxis dataKey="month"/>
-                <YAxis strokeDasharray="3 3" dataKey="averageRating"/>
-                <Area type='monotone' dataKey='averageRating' stroke='#8884d8' fill='#8884d8' />
+                <XAxis dataKey="month"  type="category"/>
+                <YAxis dataKey="averageRating" type="number"/>
+                <ReferenceLine x="month" y="averageRating" strokt="red"/>
+                <Area type='monotone' dataKey='averageRating' stroke="#8884d8" fill="#8884d8" />
+                
                 </AreaChart>
               </div>
             </Popover>

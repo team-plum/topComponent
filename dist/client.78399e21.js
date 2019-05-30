@@ -95562,10 +95562,15 @@ function (_React$Component) {
         }, _react.default.createElement(_recharts.CartesianGrid, {
           strokeDasharray: "3 3"
         }), _react.default.createElement(_recharts.XAxis, {
-          dataKey: "month"
+          dataKey: "month",
+          type: "category"
         }), _react.default.createElement(_recharts.YAxis, {
-          strokeDasharray: "3 3",
-          dataKey: "averageRating"
+          dataKey: "averageRating",
+          type: "number"
+        }), _react.default.createElement(_recharts.ReferenceLine, {
+          x: "month",
+          y: "averageRating",
+          strokt: "red"
         }), _react.default.createElement(_recharts.Area, {
           type: "monotone",
           dataKey: "averageRating",
