@@ -225,8 +225,8 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
               </div>
               <div>
                 <AreaChart 
-                  width={600} 
-                  height ={400} 
+                  width={200} 
+                  height ={125} 
                   data={this.state.graphData}
                 > 
                 <CartesianGrid strokeDasharray="1 1"/>
@@ -236,8 +236,8 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
                 </AreaChart>
                 <br></br>
                 <BarChart 
-                  width={600}
-                  height={400}
+                  width={200}
+                  height={125}
                   data={this.barGraphDataKey()}
                   layout="vertical"
                   >
