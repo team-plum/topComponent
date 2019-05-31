@@ -95400,7 +95400,7 @@ function (_React$Component) {
 
         _this2.getTotalAndAverageReviews(data.data);
 
-        _this2.handleYearButtonClick(2019);
+        _this2.handleYearButtonClick(2018);
 
         _this2.getBarGraphInfo(data.data);
       }).catch(function (err) {

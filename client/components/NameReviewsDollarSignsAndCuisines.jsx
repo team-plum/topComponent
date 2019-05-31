@@ -57,7 +57,7 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
         ratingsInfo: convertedData
       })
       this.getTotalAndAverageReviews(data.data)
-      this.handleYearButtonClick(2019)
+      this.handleYearButtonClick(2018)
       this.getBarGraphInfo(data.data)
     })
     .catch((err) => {
