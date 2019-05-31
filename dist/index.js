@@ -95387,7 +95387,7 @@ function (_React$Component) {
         return results;
       };
 
-      _axios.default.get('/ratings', {
+      _axios.default.get('http://18.207.242.24:3008/ratings', {
         params: {
           restaurant: restaurant
         }
@@ -95764,7 +95764,7 @@ function (_React$Component) {
     value: function getImages(restaurant) {
       var _this2 = this;
 
-      _axios.default.get('/picturePopUp', {
+      _axios.default.get('http://18.207.242.24:3008/picturePopUp', {
         params: {
           restaurant: restaurant
         }
@@ -95856,7 +95856,7 @@ function (_React$Component) {
     value: function getRestaurantInfo(restaurant) {
       var _this2 = this;
 
-      _axios.default.get('/restaurant', {
+      _axios.default.get('http://18.207.242.24:3008/restaurant', {
         params: {
           restaurant: restaurant
         }

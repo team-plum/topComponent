@@ -19,7 +19,7 @@ class ImageCarousel extends React.Component {
     return <img src={arr[index]['foodPictureThumb']} />    
   }
   getImages (restaurant) {
-    axios.get('/picturePopUp', {params: {restaurant: restaurant}})
+    axios.get('http://18.207.242.24:3008/picturePopUp', {params: {restaurant: restaurant}})
     .then((data) => {
       this.setState({
         images: data.data

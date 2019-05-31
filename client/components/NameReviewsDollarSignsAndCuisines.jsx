@@ -50,7 +50,7 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
       return results
     }
    
-    axios.get('/ratings', { params: {restaurant: restaurant}})
+    axios.get('http://18.207.242.24:3008/ratings', { params: {restaurant: restaurant}})
     .then((data) => {
       let convertedData = yearSorter(data.data)
       this.setState({

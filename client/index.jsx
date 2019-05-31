@@ -25,7 +25,7 @@ class TopComponent extends React.Component{
   }
 
   getRestaurantInfo (restaurant) {
-    axios.get('/restaurant', {params: {restaurant: restaurant}})
+    axios.get('http://18.207.242.24:3008/restaurant', {params: {restaurant: restaurant}})
     .then((data) => {
       this.setState({
         restaurantInfo: data.data[0]
