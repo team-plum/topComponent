@@ -95823,17 +95823,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var App =
+var TopComponent =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(App, _React$Component);
+  _inherits(TopComponent, _React$Component);
 
-  function App(props) {
+  function TopComponent(props) {
     var _this;
 
-    _classCallCheck(this, App);
+    _classCallCheck(this, TopComponent);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TopComponent).call(this, props));
     _this.state = {
       restaurant: _this.randomRestaurant(),
       restaurantInfo: {}
@@ -95843,7 +95843,7 @@ function (_React$Component) {
     return _this;
   }
 
-  _createClass(App, [{
+  _createClass(TopComponent, [{
     key: "componentDidMount",
     value: function componentDidMount() {}
   }, {
@@ -95892,10 +95892,10 @@ function (_React$Component) {
     }
   }]);
 
-  return App;
+  return TopComponent;
 }(_react.default.Component);
 
-_reactDom.default.render(_react.default.createElement(App, null), document.getElementById('app'));
+_reactDom.default.render(_react.default.createElement(TopComponent, null), document.getElementById('TopComponent'));
 },{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","axios":"../node_modules/axios/index.js","./components/NameReviewsDollarSignsAndCuisines.jsx":"components/NameReviewsDollarSignsAndCuisines.jsx","./components/Map.jsx":"components/Map.jsx","./components/imageCarousel.jsx":"components/imageCarousel.jsx"}],"../../../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

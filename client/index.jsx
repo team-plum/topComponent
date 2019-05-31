@@ -5,7 +5,7 @@ import NameReviewsDollarSignsAndCuisines from './components/NameReviewsDollarSig
 import Map from './components/Map.jsx'
 import ImageCarousel from './components/imageCarousel.jsx'
 
-class App extends React.Component{
+class TopComponent extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -69,4 +69,4 @@ class App extends React.Component{
 }
 
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<TopComponent />, document.getElementById('TopComponent'));
