@@ -1,14 +1,18 @@
 import React from 'react'
 import axios from 'axios';
+import {Modal, ModalBody, Image} from 'react-bootstrap'
 
 class ImageCarousel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      images: [{foodPictureThumb: ''}, {foodPictureThumb: ''}, {foodPictureThumb: ''}]
+      images: [{foodPictureThumb: ''}, {foodPictureThumb: ''}, {foodPictureThumb: ''}],
+      showModal: false
     }
     this.getImages = this.getImages.bind(this)
     this.renderImages = this.renderImages.bind(this)
+    this.handleImageClick = this.handleImageClick.bind(this)
+    // this.pictureModal=this.pictureModal.bind(this)
   }
   
   componentDidMount() {
@@ -16,7 +20,24 @@ class ImageCarousel extends React.Component {
   }
 
   renderImages(arr, index) {
-    return <img src={arr[index]['foodPictureThumb']} />    
+     return (
+        <div>
+          <div>
+            <img 
+              src={arr[index].foodPictureThumb} 
+              onClick={this.handleImageClick}
+            />
+          </div>
+          <div>
+            <Modal show={this.state.showModal}>
+              <ModalBody>
+                {console.log('prting full url => ', arr[index].foodPictureFull)}
+                <Image scr={arr[index].foodPictureFull} fluid/>
+              </ModalBody>  
+            </Modal>
+          </div>
+        </div>
+      ) 
   }
   getImages (restaurant) {
     axios.get('http://18.207.242.24:3008/picturePopUp', {params: {restaurant: restaurant}})
@@ -30,17 +51,38 @@ class ImageCarousel extends React.Component {
     })
   }
 
+  handleImageClick() {
+    this.setState({
+      showModal: !this.state.showModal
+    })
+  }
 
+  // pictureModal(picture) {
+  //   return  <Modal show={this.state.showModal}>
+  //             <ModalBody>
+  //             {console.log('printing from pictureModal', picture)}
+  //             {/* <img scr={picture}/> */}
+  //             </ModalBody> 
+  //           </Modal>
+  // }
   
   render () {
     return (
       <div>
-        {this.renderImages(this.state.images, 0)}
-        {this.renderImages(this.state.images, 1)}
-        {this.renderImages(this.state.images, 2)}
+        <div>
+          {this.renderImages(this.state.images, 0)}
+        </div>
+        <div>
+          {this.renderImages(this.state.images, 1)}
+        </div>
+        <div>
+          {this.renderImages(this.state.images, 2)}
+        </div>
       </div>
+      
     )
   }
+
 }
 
 export default ImageCarousel

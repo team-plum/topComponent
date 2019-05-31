@@ -95487,16 +95487,14 @@ function (_React$Component) {
       var results = [];
 
       for (var key in this.state.ratingsInfo) {
-        results.push(_react.default.createElement(_reactBootstrap.ButtonGroup, {
-          "aria-label": "years buttons"
-        }, _react.default.createElement(_reactBootstrap.Button, {
+        results.push(_react.default.createElement(_reactBootstrap.Button, {
           variant: "outline-secondary",
           key: key,
           value: key,
           onClick: function onClick(e) {
             _this3.handleYearButtonClick(e.target.value);
           }
-        }, key)));
+        }, key));
       }
 
       return results;
@@ -95586,9 +95584,7 @@ function (_React$Component) {
         overlay: _react.default.createElement(_reactBootstrap.Popover, {
           id: "detailsPopover",
           title: "Rating Details"
-        }, _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.ButtonToolbar, {
-          "aria-label": "years buttons"
-        }, this.detailsYearsButtonGen())), _react.default.createElement("div", null, _react.default.createElement(_recharts.AreaChart, {
+        }, _react.default.createElement("div", null, this.detailsYearsButtonGen()), _react.default.createElement("div", null, _react.default.createElement(_recharts.AreaChart, {
           width: 200,
           height: 125,
           data: this.state.graphData
@@ -95702,6 +95698,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _reactBootstrap = require("react-bootstrap");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -95740,10 +95738,13 @@ function (_React$Component) {
         foodPictureThumb: ''
       }, {
         foodPictureThumb: ''
-      }]
+      }],
+      showModal: false
     };
     _this.getImages = _this.getImages.bind(_assertThisInitialized(_this));
     _this.renderImages = _this.renderImages.bind(_assertThisInitialized(_this));
+    _this.handleImageClick = _this.handleImageClick.bind(_assertThisInitialized(_this)); // this.pictureModal=this.pictureModal.bind(this)
+
     return _this;
   }
 
@@ -95755,9 +95756,15 @@ function (_React$Component) {
   }, {
     key: "renderImages",
     value: function renderImages(arr, index) {
-      return _react.default.createElement("img", {
-        src: arr[index]['foodPictureThumb']
-      });
+      return _react.default.createElement("div", null, _react.default.createElement("div", null, _react.default.createElement("img", {
+        src: arr[index].foodPictureThumb,
+        onClick: this.handleImageClick
+      })), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
+        show: this.state.showModal
+      }, _react.default.createElement(_reactBootstrap.ModalBody, null, console.log('prting full url => ', arr[index].foodPictureFull), _react.default.createElement(_reactBootstrap.Image, {
+        scr: arr[index].foodPictureFull,
+        fluid: true
+      })))));
     }
   }, {
     key: "getImages",
@@ -95777,9 +95784,24 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "handleImageClick",
+    value: function handleImageClick() {
+      this.setState({
+        showModal: !this.state.showModal
+      });
+    } // pictureModal(picture) {
+    //   return  <Modal show={this.state.showModal}>
+    //             <ModalBody>
+    //             {console.log('printing from pictureModal', picture)}
+    //             {/* <img scr={picture}/> */}
+    //             </ModalBody> 
+    //           </Modal>
+    // }
+
+  }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, this.renderImages(this.state.images, 0), this.renderImages(this.state.images, 1), this.renderImages(this.state.images, 2));
+      return _react.default.createElement("div", null, _react.default.createElement("div", null, this.renderImages(this.state.images, 0)), _react.default.createElement("div", null, this.renderImages(this.state.images, 1)), _react.default.createElement("div", null, this.renderImages(this.state.images, 2)));
     }
   }]);
 
@@ -95788,7 +95810,7 @@ function (_React$Component) {
 
 var _default = ImageCarousel;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js"}],"index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js"}],"index.jsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));

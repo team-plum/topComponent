@@ -120,7 +120,6 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     let results = []
     for(var key in this.state.ratingsInfo) {
       results.push(
-        <ButtonGroup aria-label="years buttons" >
           <Button 
             variant="outline-secondary" 
             key={key} 
@@ -129,7 +128,6 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
           >
             {key}
           </Button>
-        </ButtonGroup>
       )
     }
     return results
@@ -218,9 +216,7 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
               title="Rating Details"
             >
               <div>
-                <ButtonToolbar aria-label="years buttons" >
                 {this.detailsYearsButtonGen()}
-                </ButtonToolbar>
               </div>
               <div>
                 <AreaChart 
