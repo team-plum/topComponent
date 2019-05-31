@@ -4,9 +4,9 @@
   "description": "mock yelp component",
   "main": "index.js",
   "scripts": {
-    "react-dev": "parcel watch client/index.html client/index.jsx stockPics",
+    "react-dev": "parcel watch client/index.html client/index.jsx",
     "server-dev": "nodemon server/index.js",
-    "build": "parcel build client/index.html client/index.jsx stockPics --out-dir build --no-source-maps",
+    "build": "parcel build client/index.html client/index.jsx --out-dir build --no-source-maps",
     "test": "jest"
   },
   "author": "seo218",
