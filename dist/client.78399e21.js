@@ -95569,7 +95569,6 @@ function (_React$Component) {
         counter--;
       }
 
-      console.log(results);
       this.setState({
         barGraphData: results
       });
@@ -95590,8 +95589,8 @@ function (_React$Component) {
         }, _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.ButtonToolbar, {
           "aria-label": "years buttons"
         }, this.detailsYearsButtonGen())), _react.default.createElement("div", null, _react.default.createElement(_recharts.AreaChart, {
-          width: 600,
-          height: 400,
+          width: 200,
+          height: 125,
           data: this.state.graphData
         }, _react.default.createElement(_recharts.CartesianGrid, {
           strokeDasharray: "1 1"
@@ -95607,8 +95606,8 @@ function (_React$Component) {
           stroke: "#8884d8",
           fill: "#8884d8"
         })), _react.default.createElement("br", null), _react.default.createElement(_recharts.BarChart, {
-          width: 600,
-          height: 400,
+          width: 200,
+          height: 125,
           data: this.barGraphDataKey(),
           layout: "vertical"
         }, _react.default.createElement(_recharts.XAxis, {
@@ -95925,7 +95924,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56585" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52496" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

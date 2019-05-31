@@ -188,7 +188,6 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
       results.push(ratingsObj)
       counter --
     }
-    console.log(results)
     this.setState({
       barGraphData: results
     })
