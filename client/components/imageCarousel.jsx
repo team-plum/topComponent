@@ -1,22 +1,44 @@
 import React from 'react'
 import axios from 'axios';
 import {Modal, ModalBody, Image} from 'react-bootstrap'
+import { thisTypeAnnotation } from '@babel/types';
 
 class ImageCarousel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       images: [{foodPictureThumb: ''}, {foodPictureThumb: ''}, {foodPictureThumb: ''}],
-      showModal: false
+      showModal: false,
+      restaurantInfo: {},
+      restaurant: null
     }
     this.getImages = this.getImages.bind(this)
     this.renderImages = this.renderImages.bind(this)
     this.handleImageClick = this.handleImageClick.bind(this)
+    this.getRestaurantInfo = this.getRestaurantInfo.bind(this)
     // this.pictureModal=this.pictureModal.bind(this)
   }
   
   componentDidMount() {
-    this.getImages(this.props.restaurant)
+    this.getRestaurantInfo()
+  }
+
+  getRestaurantInfo () {
+    let base = window.location.pathname;
+    let arr = base.split('/');
+    let id = arr[1];
+    axios.get('http://18.207.242.24:3008/restaurant', {params: {restaurant: id}})
+    .then((data) => {
+      this.setState({
+        restaurantInfo: data.data[0],
+        restaurant: id
+      })
+      this.getImages(this.state.restaurant)
+
+    })
+    .catch((err) => {
+      console.log('failed to get restaurant info at client', err)
+    })
   }
 
   renderImages(arr, index) {
@@ -31,7 +53,6 @@ class ImageCarousel extends React.Component {
           <div>
             <Modal show={this.state.showModal}>
               <ModalBody>
-                {console.log('prting full url => ', arr[index].foodPictureFull)}
                 <Image scr={arr[index].foodPictureFull} fluid/>
               </ModalBody>  
             </Modal>
@@ -39,6 +60,7 @@ class ImageCarousel extends React.Component {
         </div>
       ) 
   }
+
   getImages (restaurant) {
     axios.get('http://18.207.242.24:3008/picturePopUp', {params: {restaurant: restaurant}})
     .then((data) => {
@@ -57,14 +79,7 @@ class ImageCarousel extends React.Component {
     })
   }
 
-  // pictureModal(picture) {
-  //   return  <Modal show={this.state.showModal}>
-  //             <ModalBody>
-  //             {console.log('printing from pictureModal', picture)}
-  //             {/* <img scr={picture}/> */}
-  //             </ModalBody> 
-  //           </Modal>
-  // }
+  
   
   render () {
     return (

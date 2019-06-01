@@ -14,15 +14,18 @@ let app = express()
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.use(cors())
-let fileToServePath = path.resolve(__dirname, '../dist/')
+
+// let fileToServePath = path.resolve(__dirname, '../dist/')
+
+let fileToServePath = path.resolve(__dirname, '../build/')
+
 app.use(express.static(fileToServePath))
+app.use('/:id', express.static(fileToServePath));
 
 app.get('/restaurant', getRestaurantInfoController)
 app.get('/picturePopUp', getPicturePopUpInfoController)
 app.get('/ratings', getRatingsInfoController)
-// app.get('/logo', '../logo.png')
-// app.get('googleMap')
-
+app.get('/api/questions/:num', getRestaurantInfoController)
 
 
 app.listen(port, () => {

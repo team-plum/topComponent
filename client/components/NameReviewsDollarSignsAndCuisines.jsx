@@ -6,7 +6,7 @@ import halfStar from '../../stockPics/halfstar.png'
 import emptyStar from '../../stockPics/empty star.png'
 // import detailsButtonImg from '../../../stockPics/details button.png'
 import { CartesianGrid, XAxis, YAxis, AreaChart, Area, BarChart, Bar} from 'recharts'
-import { Button, Popover, OverlayTrigger, ButtonGroup, ButtonToolbar} from 'react-bootstrap'
+import { Button, Popover, OverlayTrigger} from 'react-bootstrap'
 
 class NameReviewsDollarSignsAndCuisines extends React.Component{
   constructor(props){
@@ -18,7 +18,10 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
       cuisines: '',
       graphData: [],
       barGraphData: [{numOfRatings: 0, num: 0}],
-      barGraphDataToggle: false
+      barGraphDataToggle: false,
+      restaurant: 1,
+      restaurantInfo: {}
+
    }
     this.getRatingsInfo = this.getRatingsInfo.bind(this)
     this.getTotalAndAverageReviews = this.getTotalAndAverageReviews.bind(this)
@@ -30,11 +33,31 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
     this.getBarGraphInfo = this.getBarGraphInfo.bind(this)
     this.handleDetailsButtonClick = this.handleDetailsButtonClick.bind(this)
     this.barGraphDataKey = this.barGraphDataKey.bind(this)
+    this.getRestaurantInfo = this.getRestaurantInfo.bind(this)
   }
 
   componentDidMount () {
-    this.props.getRestaurantInfo(this.props.restaurant)
-    this.getRatingsInfo(this.props.restaurant)
+    this.getRestaurantInfo()
+    // this.getRatingsInfo(this.state.restaurant)
+  }
+
+  getRestaurantInfo () {
+    let base = window.location.pathname;
+    let arr = base.split('/');
+    let id = arr[1];
+    console.log('printing id in get restinfo in garph comp =>', id)
+    axios.get('http://18.207.242.24:3008/restaurant', {params: {restaurant: id}})
+    .then((data) => {
+      this.setState({
+        restaurantInfo: data.data[0],
+        restaurant: id
+      })
+      this.getRatingsInfo(this.state.restaurant)
+      // console.log('expect restaurant info => ', data.data[0])  
+    })
+    .catch((err) => {
+      console.log('failed to get restaurant info at client', err)
+    })
   }
 
   getRatingsInfo(restaurant) {
@@ -119,6 +142,13 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
   detailsYearsButtonGen () {
     let results = []
     for(var key in this.state.ratingsInfo) {
+      if(results.length === 5) results.push(<br></br>)
+      if(results.length === 11) results.push(<br></br>)
+      if(results.length === 17) results.push(<br></br>)
+      if(results.length === 23) results.push(<br></br>)
+      if(results.length === 29) results.push(<br></br>)
+      if(results.length === 35) results.push(<br></br>)
+
       results.push(
           <Button 
             variant="outline-secondary" 

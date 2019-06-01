@@ -6,31 +6,34 @@ import Map from './components/Map.jsx'
 import ImageCarousel from './components/imageCarousel.jsx'
 
 class TopComponent extends React.Component{
+  
   constructor(props){
     super(props)
     this.state = {
-      restaurant: this.randomRestaurant(),
+      restaurant: null,
       restaurantInfo: {}
     }
-    this.randomRestaurant = this.randomRestaurant.bind(this)
     this.getRestaurantInfo = this.getRestaurantInfo.bind(this)
   }
 
   componentDidMount() {
-    
+    this.getRestaurantInfo()
   }
 
-  randomRestaurant () {
-    return Math.ceil(Math.random() * 100)
-  }
 
-  getRestaurantInfo (restaurant) {
-    axios.get('http://18.207.242.24:3008/restaurant', {params: {restaurant: restaurant}})
+
+  getRestaurantInfo () {
+    let base = window.location.pathname;
+    let arr = base.split('/');
+    let id = arr[1];
+    console.log('printing id in get restinfo in topcomponent =>', id)
+    axios.get('http://18.207.242.24:3008/restaurant', {params: {restaurant: id}})
     .then((data) => {
       this.setState({
-        restaurantInfo: data.data[0]
+        restaurantInfo: data.data[0],
+        restaurant: id
       })
-      // console.log('expect restaurant info => ', data.data[0])
+      // console.log('expect restaurant info => ', data.data[0])  
     })
     .catch((err) => {
       console.log('failed to get restaurant info at client', err)
