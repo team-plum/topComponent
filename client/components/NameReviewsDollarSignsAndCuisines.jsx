@@ -12,7 +12,15 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      ratingsInfo: {},
+      ratingsInfo: {
+        addressOfRestaurant: "63 Dogwood Street  Lake Mary FL 32746",
+        cuisine:" Slovenian Food",
+        dollarSigns: 3,
+        id: 8,
+        nameOfRestaurant: "Alabama Kitchen Inc.",
+        phoneNumber: "(588) 398-2231",
+        website: "wwww.AlabamaKitchenInc..com"
+      },
       numberOfRatings: 0,
       averageRating: 0,
       cuisines: '',
