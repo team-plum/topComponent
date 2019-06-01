@@ -29,7 +29,7 @@ app.get('/api/questions/:num', getRestaurantInfoController)
 
 
 app.listen(port, () => {
-  console.log(`listening on ${port}!`)
+  console.log(`listening on ${port}! printing dirname => ${__dirname}`)
 })
 
 
