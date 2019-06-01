@@ -15,9 +15,9 @@ app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.use(cors())
 
-// let fileToServePath = path.resolve(__dirname, '../dist/')
+let fileToServePath = path.resolve(__dirname, '../dist/')
 
-let fileToServePath = path.resolve(__dirname, '../build/')
+// let fileToServePath = path.resolve(__dirname, '../build/')
 
 app.use(express.static(fileToServePath))
 app.use('/:id', express.static(fileToServePath));
