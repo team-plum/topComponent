@@ -56,7 +56,7 @@ class NameReviewsDollarSignsAndCuisines extends React.Component{
       // console.log('expect restaurant info => ', data.data[0])  
     })
     .catch((err) => {
-      console.log('failed to get restaurant info at client', err)
+      console.log('failed to get restaurant info at detailsButton', err)
     })
   }
 
